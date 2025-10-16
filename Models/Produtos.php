@@ -22,7 +22,6 @@ class Produtos extends Model
         $sql->bindValue(":quantidade", $quantidade);
         $sql->bindValue(":preco", $preco);
         $sql->bindValue(":categoria", $categoria);
-        $sql->bindValue(":categoria", $categoria);
         $sql->execute();
 
         return $this->db->lastInsertId();
@@ -56,7 +55,7 @@ class Produtos extends Model
     // Atualizar produtos
     public function atualizarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $id)
     {
-        if($this->existeProdutos($id) == false) {
+        if ($this->existeProdutos($id) == false) {
             $sql = $this->db->prepare("UPDATE produtos SET nome_produto = :nome_produto, descricao = :descricao, quantidade = :quantidade, preco = :preco, categoria = :categoria WHERE id = :id");
             $sql->bindValue(":name", $nome_produto);
             $sql->bindValue(":descricao", $descricao);
@@ -92,4 +91,20 @@ class Produtos extends Model
         $sql->bindValue(':id', $id);
         $sql->execute();
     }
+
+    // Atualiza a situação (ativo/inativo) de um produto
+    public function editarSituacaoProduto($situacao, $id)
+    {
+        $sql = $this->db->prepare("UPDATE produtos SET situacao = :situacao WHERE id = :id");
+        $sql->bindValue(':situacao', $situacao);
+        $sql->bindValue(':id', $id);
+        $sql->execute();
+
+        return true;
+    }
+
+    public function editNameProdutos($name_edit, $id_produtos){
+
+    }
+
 }

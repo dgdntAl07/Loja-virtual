@@ -43,7 +43,7 @@
 													<div class="col-md-12 mb-3">
 														<div class="form-group">
 															<label for="name" class="form-label">Nome</label>
-															<input type="text" id="name" name="name"
+															<input type="text" id="name" name="nome_produto"
 																class="form-control" placeholder="Nome do Produto"
 																required>
 														</div>
@@ -53,14 +53,14 @@
 															<label for="exampleFormControlTextarea1"
 																class="form-label">Descrição</label>
 															<textarea class="form-control"
-																id="exampleFormControlTextarea1" rows="3"></textarea>
+																id="exampleFormControlTextarea1" name="descricao" rows="3"></textarea>
 														</div>
 													</div>
 													<div class="col-md-6">
 														<div class="form-group">
 															<label for="type_produto"
 																class="form-label">Quantidade</label>
-															<input type="text" id="name" name="name"
+															<input type="text" id="name" name="quantidade"
 																class="form-control" required>
 														</div>
 													</div>
@@ -69,8 +69,11 @@
 															<label for="type_produto"
 																class="form-label">Categoria</label>
 															<select name="type_produto" id="type_produto"
-																class="form-select" required>
+																class="form-select" name="categoria" required>
 																<option disabled>Selecione o tipo</option>
+																<option value="1">One</option>
+																<option value="2">Two</option>
+																<option value="3">Three</option>
 																<?php foreach ($permissions_list as $permission): ?>
 																	<option value="<?= $permission['id']; ?>">
 																		<?= $permission['name']; ?>
@@ -98,7 +101,8 @@
 															</div>
 															<div class="form-check">
 																<input class="form-check-input" type="radio"
-																	name="flexRadioDefault" id="flexRadioDefault2" checked>
+																	name="flexRadioDefault" id="flexRadioDefault2"
+																	checked>
 																<label class="form-check-label" for="flexRadioDefault2">
 																	Default checked radio
 																</label>
@@ -165,11 +169,14 @@
 								<?php if (isset($produtos_list)): ?>
 									<?php foreach ($produtos_list as $produto): ?>
 										<tr>
-											<td><?= $produto['name']; ?></td>
-											<td><?= $produto['email']; ?></td>
+											<td><?= $produto['nome_produto']; ?></td>
+											<td><?= $produto['quantidade']; ?></td>
+											<td><?= $produto['descricao']; ?></td>
+											<td><?= $produto['preco']; ?></td>
 											<td><?= $produto['name_group']; ?></td>
 											<td class="<?= ($produto['situation'] == 1) ? 'table-success' : 'table-danger'; ?>">
-												<?= ($produto['situation'] == 1) ? 'Disponivel' : 'Indisponivel'; ?></td>
+												<?= ($produto['situation'] == 1) ? 'Disponivel' : 'Indisponivel'; ?>
+											</td>
 											<td class="table-action" width="75">
 												<a data-bs-toggle="modal" data-bs-target="#editproduto<?= $produto['id']; ?>"
 													class="ms-2">
