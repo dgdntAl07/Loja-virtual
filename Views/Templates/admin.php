@@ -12,12 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
      <!-- Bootstrap connection -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     
-
     <!-- FAVICON -->
     <link rel="shortcut icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" />
     <link rel="icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" type="image/x-icon"/>
@@ -48,13 +47,14 @@
                             <i class="align-middle" data-feather="trending-up"></i> <span class="align-middle">DashBoard</span>
                         </a>
                     </li>
+                    
 
-                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Produtos")?'active':''; ?>">
+                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Produto")?'active':''; ?>">
                         <a class="sidebar-link" href="<?=BASE_URL.'Produtos';?>">
-                            <i class="align-middle" data-feather="trending-up"></i> <span class="align-middle">Produtos</span>
+                            <i class="align-middle" data-feather="trending-up"></i> <span class="align-middle">Produto</span>
                         </a>
                     </li>
-                    <!--  -->
+                    
                     <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Configurações")?'active':''; ?> ">
                         <!-- Perfil -->
                         <a href="#perfil" data-bs-toggle="collapse" class="sidebar-link collapsed">
@@ -222,5 +222,6 @@
         const BASE_URL = '<?= BASE_URL;?>'
     </script>
     <?php if(isset($viewData['JS'])){echo $viewData['JS'];}; ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

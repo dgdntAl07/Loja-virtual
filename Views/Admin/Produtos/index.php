@@ -28,6 +28,7 @@
 								<a data-bs-toggle="modal" data-bs-target="#addproduto" class="btn btn-secondary">+
 									Adicionar Produtos</a>
 							</div>
+
 							<!-- MODAL ADICIONAR USUARIO -->
 							<div class="modal fade" id="addproduto" tabindex="-1" role="dialog" aria-hidden="true">
 								<div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -53,7 +54,8 @@
 															<label for="exampleFormControlTextarea1"
 																class="form-label">Descrição</label>
 															<textarea class="form-control"
-																id="exampleFormControlTextarea1" name="descricao" rows="3"></textarea>
+																id="exampleFormControlTextarea1" name="descricao"
+																rows="3"></textarea>
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -71,9 +73,11 @@
 															<select name="type_produto" id="type_produto"
 																class="form-select" name="categoria" required>
 																<option disabled>Selecione o tipo</option>
-																<option value="1">One</option>
-																<option value="2">Two</option>
-																<option value="3">Three</option>
+																<option value="1">Limpeza</option>
+																<option value="2">Perfumes</option>
+																<option value="3">Cosmeticos</option>
+																<option value="4">Brindes</option>
+
 																<?php foreach ($permissions_list as $permission): ?>
 																	<option value="<?= $permission['id']; ?>">
 																		<?= $permission['name']; ?>
@@ -94,7 +98,8 @@
 														<div class="d-flex">
 															<div class="form-check">
 																<input class="form-check-input" type="radio"
-																	name="flexRadioDefault" id="flexRadioDefault1">
+									
+																name="flexRadioDefault" id="flexRadioDefault1">
 																<label class="form-check-label" for="flexRadioDefault1">
 																	Default radio
 																</label>
@@ -121,6 +126,7 @@
 								</div>
 							</div>
 							<!-- FIM MODAL ADICIONAR USUARIO -->
+
 							<hr>
 						</div>
 					</div>
@@ -159,8 +165,9 @@
 									<th>Produto</th>
 									<th>Quantidade</th>
 									<th>Descrição</th>
-									<th>Preço</th>
 									<th>Situação</th>
+									<th>Preço</th>
+									<th>Categoria</th>
 									<th>Ações</th>
 								</tr>
 							</thead>
@@ -169,25 +176,23 @@
 								<?php if (isset($produtos_list)): ?>
 									<?php foreach ($produtos_list as $produto): ?>
 										<tr>
-											<td><?= $produto['nome_produto']; ?></td>
-											<td><?= $produto['quantidade']; ?></td>
-											<td><?= $produto['descricao']; ?></td>
-											<td><?= $produto['preco']; ?></td>
-											<td><?= $produto['name_group']; ?></td>
-											<td class="<?= ($produto['situation'] == 1) ? 'table-success' : 'table-danger'; ?>">
-												<?= ($produto['situation'] == 1) ? 'Disponivel' : 'Indisponivel'; ?>
-											</td>
+											<td><?= $produto->id; ?></td>
+											<td><?= $produto->nome_produto; ?></td>
+											<td><?= $produto->quantidade; ?></td>
+											<td><?= $produto->descricao; ?></td>
+											<td><?= $produto->situacao; ?></td>
+											<td><?= $produto->preco; ?></td>
+											<td><?= $produto->categoria; ?></td>
 											<td class="table-action" width="75">
-												<a data-bs-toggle="modal" data-bs-target="#editproduto<?= $produto['id']; ?>"
+												<a data-bs-toggle="modal" data-bs-target="#editproduto<?= $produto->id ?>"
 													class="ms-2">
-													<i data-feather="file-text"></i>
+													<i class="bi bi-pencil-square"></i>
 												</a>
-												<a data-bs-toggle="modal" data-bs-target="#editproduto<?= $produto['id']; ?>"
+												<a data-bs-toggle="modal" data-bs-target="#editproduto<?= $produto->id ?>"
 													class="ms-2">
 													<i class="bi bi-trash3"></i>
 												</a>
 											</td>
-
 
 										</tr>
 										<!-- MODAL EDITAR USUARIO -->

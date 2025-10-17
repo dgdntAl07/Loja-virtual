@@ -20,10 +20,9 @@ class ProdutosController extends Controller{
         $produtos = new Produtos();
 
 		$this->data['nivel-1'] = 'Produtos';
-
         
         $this->data['produtos_list'] = $produtos->getAll();
         
-        $this->loadTemplateAdmin('Admin/Produtos/index', $this->data);
+        $this->loadTemplateAdmin('Admin/Produtos/index2', $this->data);
     }
 }
