@@ -2,17 +2,15 @@
 
 class Produtos extends Model
 {
-
+    private $produtoInfo;
     private $permissions;
 
-    public function hasPermission($name)
-    {
-        if (in_array($name, $this->permissions)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
+
+    public function hasPermission($name){
+		return $this->permissions->hasPermission($name);
+	}
+
     // Adicionar produtos 
     public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria)
     {
@@ -52,7 +50,7 @@ class Produtos extends Model
         }
     }
 
-    // Atualizar produtos
+    // Atualizar/Editar produtos
     public function atualizarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $id)
     {
         if ($this->existeProdutos($id) == false) {
@@ -92,6 +90,8 @@ class Produtos extends Model
         $sql->execute();
     }
 
+
+
     // Atualiza a situação (ativo/inativo) de um produto
     public function editarSituacaoProduto($situacao, $id)
     {
@@ -101,10 +101,6 @@ class Produtos extends Model
         $sql->execute();
 
         return true;
-    }
-
-    public function editNameProdutos($name_edit, $id_produtos){
-
     }
 
 }
