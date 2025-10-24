@@ -7,22 +7,24 @@ class Produtos extends Model
 
 
 
-    public function hasPermission($name){
-		return $this->permissions->hasPermission($name);
-	}
+    public function hasPermission($name)
+    {
+        return $this->permissions->hasPermission($name);
+    }
 
     // Adicionar produtos 
-    public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria)
+    public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $situacao)
     {
-        $sql = $this->db->prepare("INSERT INTO products SET nome = :nome, descricao = :descricao, quantidade = :quantidade, preco = :preco, categoria = :categoria, situacao = '1'");
-        $sql->bindValue(":name", $nome_produto);
+        $sql = $this->db->prepare("INSERT INTO produtos SET nome_produto = :nome, descricao = :descricao, quantidade = :quantidade, preco = :preco, situacao = :situacao, categoria = :categoria");
+        $sql->bindValue(":nome", $nome_produto);
         $sql->bindValue(":descricao", $descricao);
         $sql->bindValue(":quantidade", $quantidade);
         $sql->bindValue(":preco", $preco);
+        $sql->bindValue(":situacao", $situacao);
         $sql->bindValue(":categoria", $categoria);
         $sql->execute();
 
-        return $this->db->lastInsertId();
+        return True;
     }
 
     // Ler produtos
@@ -51,16 +53,50 @@ class Produtos extends Model
     }
 
     // Atualizar/Editar produtos
-    public function atualizarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $id)
+    // public function atualizarProdutos($nome_produto_edit, $descricao_edit, $quantidade_edit, $categoria_edit, $preco_edit, $situacao_edit, $id)
+    // {
+    //     if ($this->existeProdutos($id)) {
+    //         $sql = $this->db->prepare("UPDATE produtos SET nome_produto = :nome_produto, 
+    //         descricao = :descricao, quantidade = :quantidade, preco = :preco, 
+    //         categoria = :categoria, situacao = :situacao WHERE id = :id");
+    //         $sql->bindValue(":nome_produto", $nome_produto_edit);
+    //         $sql->bindValue(":descricao", $descricao_edit);
+    //         $sql->bindValue(":quantidade", $quantidade_edit);
+    //         $sql->bindValue(":preco", $preco_edit);
+    //         $sql->bindValue(":categoria", $categoria_edit);
+    //         $sql->bindValue(":situacao", $situacao_edit);
+    //         $sql->bindValue(":id", $id);
+    //         $sql->execute();
+
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+    public function atualizarProdutos($id, $dados)
     {
-        if ($this->existeProdutos($id) == false) {
-            $sql = $this->db->prepare("UPDATE produtos SET nome_produto = :nome_produto, descricao = :descricao, quantidade = :quantidade, preco = :preco, categoria = :categoria WHERE id = :id");
-            $sql->bindValue(":name", $nome_produto);
-            $sql->bindValue(":descricao", $descricao);
-            $sql->bindValue(":quantidade", $quantidade);
-            $sql->bindValue(":preco", $preco);
-            $sql->bindValue(":categoria", $categoria);
-            $sql->execute();
+        
+        if ($this->existeProdutos($id)) {
+            
+            if (empty($dados)) {
+                return false;
+            }
+
+            $set = [];
+            foreach ($dados as $campo => $valor) {
+                $set[] = "$campo = :$campo";
+            }
+
+            $sql = "UPDATE produtos SET " . implode(', ', $set) . " WHERE id = :id";
+            $stmt = $this->db->prepare($sql);
+
+            foreach ($dados as $campo => $valor) {
+                $stmt->bindValue(":$campo", $valor);
+            }
+
+            $stmt->bindValue(":id", $id);
+            $stmt->execute();
 
             return true;
         } else {
@@ -68,9 +104,10 @@ class Produtos extends Model
         }
     }
 
+
     private function existeProdutos($id)
     {
-        $sql = $this->db->prepare('SELECT * FROM contatos WHERE id = :id');
+        $sql = $this->db->prepare('SELECT * FROM produtos WHERE id = :id');
         $sql->bindValue(':id', $id);
         $sql->execute();
 
@@ -84,7 +121,7 @@ class Produtos extends Model
     // Deletar produtos
     public function excluirPeloID($id)
     {
-        $sql = 'DELETE FROM contatos WHERE id = :id';
+        $sql = 'DELETE FROM produtos WHERE id = :id';
         $sql = $this->db->prepare($sql);
         $sql->bindValue(':id', $id);
         $sql->execute();
@@ -93,7 +130,7 @@ class Produtos extends Model
 
 
     // Atualiza a situação (ativo/inativo) de um produto
-    public function editarSituacaoProduto($situacao, $id)
+    public function situacaoProduto($situacao, $id)
     {
         $sql = $this->db->prepare("UPDATE produtos SET situacao = :situacao WHERE id = :id");
         $sql->bindValue(':situacao', $situacao);

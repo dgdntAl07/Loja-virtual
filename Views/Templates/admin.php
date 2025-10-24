@@ -51,7 +51,7 @@
 
                     <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Produto")?'active':''; ?>">
                         <a class="sidebar-link" href="<?=BASE_URL.'Produtos';?>">
-                            <i class="align-middle" data-feather="trending-up"></i> <span class="align-middle">Produto</span>
+                            <i class="bi bi-shop"></i> <span class="align-middle">Produto</span>
                         </a>
                     </li>
                     

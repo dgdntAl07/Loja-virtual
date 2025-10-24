@@ -116,7 +116,6 @@ class UsersController extends Controller
                     $users->editSituationUser($situation, $id_user);
                 }
 
-
                 if (isset($_POST['id_group_edit']) && !empty($_POST['id_group_edit'])) {
                     $id_group_edit = addslashes($_POST['id_group_edit']);
 
