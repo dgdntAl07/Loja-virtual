@@ -29,8 +29,7 @@
                             <div class="col-md-6 mt-2 text-end">
                                 <a data-bs-toggle="modal" data-bs-target="#addproduto" class="btn btn-secondary">+
                                     Adicionar produtos</a>
-                                <a data-bs-toggle="modal" data-bs-target="#lixeira" class="btn btn-danger">
-                                    Lixeira</a>
+                                <a href="<?= BASE_URL . "Lixeira"; ?>" class="btn btn-danger">Lixeira</a>
                             </div>
 
                             <!-- Modal de Adicionar Produto-->
@@ -131,72 +130,6 @@
                             </div>
                             <!-- Fim do Modal de Adicionar -->
 
-                            <!-- Modal de Lixeira -->
-                            <div class="modal fade" id="lixeira" aria-hidden="true" tabindex="-1">
-                                <div class="modal-dialog modal-md modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            Lixeira
-                                            <button class="btn-close" type="button" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Produto</th>
-                                                        <th>Categoria</th>
-                                                        <th>Excluir</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php if (isset($produtos_list)): ?>
-                                                        <?php foreach ($produtos_list as $produto): ?>
-                                                            <tr>
-                                                                <td><?= $produto->id; ?></td>
-                                                                <td><?= $produto->nome_produto; ?></td>
-                                                                <td><?= $produto->categoria; ?></td>
-                                                                <td class="table-action">
-                                                                    <a data-bs-toggle="modal"
-                                                                        data-bs-target="#excluirproduto<?= $produto->id; ?>">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                            height="16" fill="currentColor"
-                                                                            class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                                            <path
-                                                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 
-                                                                                16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 
-                                                                                1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 
-                                                                                0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 
-                                                                                0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 
-                                                                                0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-                                                                        </svg>
-                                                                    </a>
-                                                                    <a data-bs-toggle="modal"
-                                                                        data-bs-target="#restaurarproduto<?= $produto->id; ?>">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                            height="16" fill="currentColor"
-                                                                            class="bi bi-arrow-counterclockwise"
-                                                                            viewBox="0 0 16 16">
-                                                                            <path fill-rule="evenodd"
-                                                                                d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z" />
-                                                                            <path
-                                                                                d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466" />
-                                                                        </svg>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Fim do Modal de Lixeira -->
-
-
                         </div>
                     </div>
 
@@ -236,7 +169,7 @@
                                 <th>Produto</th>
                                 <th>Quantidade</th>
                                 <th>Descrição</th>
-                                <th>Situação</th>
+                                <th>Status</th>
                                 <th>Preço</th>
                                 <th>Categoria</th>
                                 <th>Ações</th>

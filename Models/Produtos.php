@@ -5,8 +5,6 @@ class Produtos extends Model
     private $produtoInfo;
     private $permissions;
 
-
-
     public function hasPermission($name)
     {
         return $this->permissions->hasPermission($name);
@@ -43,7 +41,7 @@ class Produtos extends Model
 
     public function getAll()
     {
-        $sql = $this->db->query("SELECT * FROM produtos");
+        $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '1'");
 
         if ($sql->rowCount() > 0) {
             return $sql->fetchAll();
@@ -104,7 +102,6 @@ class Produtos extends Model
         }
     }
 
-
     private function existeProdutos($id)
     {
         $sql = $this->db->prepare('SELECT * FROM produtos WHERE id = :id');
@@ -127,17 +124,22 @@ class Produtos extends Model
         $sql->execute();
     }
 
-
-
     // Atualiza a situação (ativo/inativo) de um produto
-    public function situacaoProduto($situacao, $id)
-    {
-        $sql = $this->db->prepare("UPDATE produtos SET situacao = :situacao WHERE id = :id");
-        $sql->bindValue(':situacao', $situacao);
-        $sql->bindValue(':id', $id);
+    public function atualizarSituacaoProduto($id){
+        $sql = "UPDATE produtos SET situacao = '0' WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id);
         $sql->execute();
-
-        return true;
     }
 
+    public function situacaoProduto()
+    {
+        $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '0'");
+
+        if ($sql->rowCount() > 0) {
+            return $sql->fetchAll();
+        } else {
+            return array();
+        }
+    }
 }

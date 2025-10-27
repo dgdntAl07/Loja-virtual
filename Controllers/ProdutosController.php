@@ -28,7 +28,7 @@ class ProdutosController extends Controller
 		$this->data['nivel-1'] = 'Produtos';
 		$this->data['produtos_list'] = $produtos->getAll();
 
-
+		
 		$this->loadTemplateAdmin("Admin/Produtos/index", $this->data);
 	}
 
@@ -80,51 +80,11 @@ class ProdutosController extends Controller
 		 * 03º retornar para a view
 		 * 
 		 * pega o id como parametro principal
-		 * cria o array
+		 * criar o array
 		 * Fazer um if pra cada e colocar em um array
 		 * passa o array e o id 
 		 * o array pega o que foi enviado para alterar
 		 */
-
-
-		
-		// Editar produtos
-		// if (
-		// 	isset($_POST['id_produto_edit']) && !empty($_POST['id_produto_edit'])
-		// 	&& isset($_POST['nome_produto_edit']) && !empty($_POST['nome_produto_edit'])
-		// 	&& isset($_POST['descricao_edit']) && !empty($_POST['descricao_edit'])
-		// 	&& isset($_POST['quantidade_edit']) && !empty($_POST['quantidade_edit'])
-		// 	&& isset($_POST['categoria_edit']) && !empty($_POST['categoria_edit'])
-		// 	&& isset($_POST['preco_edit']) && !empty($_POST['preco_edit'])
-		// 	&& isset($_POST['situacao_edit']) && !empty($_POST['situacao_edit'])
-		// ) {
-		// 	$id = addslashes($_POST['id_produto_edit']);
-		// 	$nome_produto_edit = addslashes($_POST['nome_produto_edit']);
-		// 	$descricao_edit = addslashes(trim($_POST['descricao_edit']));
-		// 	$quantidade_edit = intval($_POST['quantidade_edit']);
-		// 	$categoria_edit = $_POST['categoria_edit'];
-		// 	$preco_edit = floatval($_POST['preco_edit']);
-		// 	$situacao_edit = $_POST['situacao_edit'];
-
-		// 	if (empty(trim($nome_produto_edit))) {
-		// 		echo 'Não é possivel inserir espaços em brancos';
-		// 	} else {
-		// 		$produtos->atualizarProdutos(
-		// 			$nome_produto_edit,
-		// 			$descricao_edit,
-		// 			$quantidade_edit,
-		// 			$categoria_edit,
-		// 			$preco_edit,
-		// 			$situacao_edit,
-		// 			$id
-		// 		);
-
-		// 	}
-
-		// 	exit;
-		// } else {
-		// 	echo "Algo de errado";
-		// }
 
 		if (isset($_POST['id_produto_edit']) && !empty($_POST['id_produto_edit'])) {
 
@@ -171,28 +131,6 @@ class ProdutosController extends Controller
 		}
 
 	}
-
-	// public function situacaoProdutos()
-	// {
-	// 	$produto = new Produtos();
-
-	// 	if (!empty($_GET['id'])) {
-	// 		$id = intval($_GET['id']);
-
-	// 		if (isset($_GET['situacao']) && !empty($_POST['situacao'])) {
-	// 			$situacao = addslashes($_POST['situacao']);
-
-	// 			if ($situacao == 'Disponivel') {
-	// 				$situacao = 1;
-	// 			} else {
-	// 				$situacao = 0;
-	// 			}
-
-	// 			$produto->situacaoProduto($situacao, $id);
-	// 		}
-	// 	}
-	// }
-
 
 }
 
