@@ -179,8 +179,8 @@ class ProdutosController extends Controller
 	// 	if (!empty($_GET['id'])) {
 	// 		$id = intval($_GET['id']);
 
-	// 		if (isset($_GET['situacao']) && !empty($_POST['situacao'])) {
-	// 			$situacao = addslashes($_POST['situacao']);
+	// 		if (isset($_GET['situacao']) && !empty($_GET['situacao'])) {
+	// 			$situacao = addslashes($_GET['situacao']);
 
 	// 			if ($situacao == 'Disponivel') {
 	// 				$situacao = 1;
