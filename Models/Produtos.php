@@ -11,14 +11,13 @@ class Produtos extends Model
     }
 
     // Adicionar produtos 
-    public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $situacao)
+    public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria)
     {
-        $sql = $this->db->prepare("INSERT INTO produtos SET nome_produto = :nome, descricao = :descricao, quantidade = :quantidade, preco = :preco, situacao = :situacao, categoria = :categoria");
+        $sql = $this->db->prepare("INSERT INTO produtos SET nome_produto = :nome, descricao = :descricao, quantidade = :quantidade, preco = :preco, categoria = :categoria");
         $sql->bindValue(":nome", $nome_produto);
         $sql->bindValue(":descricao", $descricao);
         $sql->bindValue(":quantidade", $quantidade);
         $sql->bindValue(":preco", $preco);
-        $sql->bindValue(":situacao", $situacao);
         $sql->bindValue(":categoria", $categoria);
         $sql->execute();
 
@@ -74,9 +73,9 @@ class Produtos extends Model
 
     public function atualizarProdutos($id, $dados)
     {
-        
+
         if ($this->existeProdutos($id)) {
-            
+
             if (empty($dados)) {
                 return false;
             }
@@ -125,7 +124,8 @@ class Produtos extends Model
     }
 
     // Atualiza a situação (ativo/inativo) de um produto
-    public function atualizarSituacaoProduto($id){
+    public function atualizarSituacaoProduto($id)
+    {
         $sql = "UPDATE produtos SET situacao = '0' WHERE id = :id";
         $sql = $this->db->prepare($sql);
         $sql->bindValue(":id", $id);
@@ -141,5 +141,25 @@ class Produtos extends Model
         } else {
             return array();
         }
+    }
+    public function atualizarSituacaoLixeira($id, $dados = [])
+    {
+        if (empty($dados))
+            return false;
+
+        $campos = [];
+        foreach ($dados as $chave => $valor) {
+            $campos[] = "$chave = :$chave";
+        }
+
+        $sql = "UPDATE produtos SET " . implode(', ', $campos) . " WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+
+        foreach ($dados as $chave => $valor) {
+            $stmt->bindValue(":$chave", $valor);
+        }
+
+        $stmt->bindValue(":id", $id);
+        return $stmt->execute();
     }
 }

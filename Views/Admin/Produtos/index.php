@@ -96,25 +96,7 @@
                                                                 required>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 mb-3">
-                                                        <label for="name" class="form-label">Situação</label>
-                                                        <div class="d-flex">
-                                                            <div class="form-check m-2">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="situacao" id="flexRadioDefault1" value="1">
-                                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                                    Disponivel
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check m-2">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="situacao" id="flexRadioDefault2" value="0">
-                                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                                    Indisponivel
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="modal-footer d-flex justify-content-end">
                                                         <button type="button" class="btn btn-danger w-25"
                                                             data-bs-dismiss="modal">Cancelar</button>
@@ -196,7 +178,7 @@
                                                             d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
                                                     </svg>
                                                 </a>
-                                                <a data-bs-toggle="modal" data-bs-target="#removerproduto<?= $produto->id; ?>">
+                                                <a data-bs-toggle="modal" data-bs-target="#enviarLixeira<?= $produto->id; ?>">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
                                                         <path
@@ -271,7 +253,7 @@
                                                                             class="form-control" placeholder="Ex: R$20.00">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-12 mb-3">
+                                                                <!-- <div class="col-md-12 mb-3">
                                                                     <label for="name" class="form-label">Situação</label>
                                                                     <div class="d-flex">
                                                                         <div class="form-check m-2">
@@ -293,7 +275,7 @@
                                                                             </label>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+                                                                </div> -->
                                                                 <div class="modal-footer d-flex justify-content-end">
                                                                     <button type="button" class="btn btn-danger w-25"
                                                                         data-bs-dismiss="modal">Cancelar</button>
@@ -310,25 +292,27 @@
                                         </div>
                                         <!-- Fim Modal Editar -->
 
-                                        <!-- Modal de Remover Produto -->
-                                        <div class="modal fade" id="removerproduto<?= $produto->id; ?>" tabindex="-1"
-                                            role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <!-- Modal de confirmação -->
+                                        <div class="modal fade" id="enviarLixeira<?= $produto->id; ?>" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Confirmação de Remoção</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                                    <div class="modal-header bg-danger text-white">
+                                                        <h5 class="modal-title">Enviar para Lixeira</h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"></button>
                                                     </div>
-                                                    <div class="modal-body ">
-                                                        <form method="POST" action=" <?= BASE_URL . 'Produtos/ #'; ?> ">
-                                                            <p>Tem certeza que deseja remover este item da sua lista de
-                                                                produtos?
-                                                            </p>
-                                                            <h6>Este item ainda poderá ser restaurado na lixeira.</h6>
+                                                    <div class="modal-body">
+                                                        Tem certeza que deseja enviar o produto
+                                                        <strong><?= $produto->nome_produto; ?></strong> para a lixeira?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form method="POST" action="<?= BASE_URL ?>Lixeira/enviarLixeira">
+                                                            <input type="hidden" name="id_produto_excluir"
+                                                                value="<?= $produto->id; ?>">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Cancelar</button>
-                                                            <button type="button" class="btn btn-danger">Remover</button>
+                                                            <button type="submit" class="btn btn-danger">Enviar</button>
                                                         </form>
                                                     </div>
                                                 </div>

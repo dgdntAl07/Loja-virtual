@@ -52,16 +52,14 @@ class ProdutosController extends Controller
 			&& isset($_POST['quantidade']) && !empty($_POST['quantidade'])
 			&& isset($_POST['descricao']) && !empty($_POST['descricao'])
 			&& isset($_POST['preco']) && !empty($_POST['preco'])
-			&& isset($_POST['situacao']) && !empty($_POST['situacao'])
 		) {
 			$nome_produto = addslashes(trim($_POST['nome_produto']));
 			$quantidade = intval($_POST['quantidade']);
 			$descricao = addslashes(trim($_POST['descricao']));
 			$preco = floatval($_POST['preco']);
 			$categoria = $_POST['categoria'];
-			$situacao = $_POST['situacao'];
 
-			$produtos->adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $situacao);
+			$produtos->adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria);
 
 		}
 
@@ -94,7 +92,7 @@ class ProdutosController extends Controller
 			$dados = [];
 
 			if (!empty(trim($_POST['nome_produto_edit'] ?? ''))) {
-				$dados['nome'] = addslashes(trim($_POST['nome_produto_edit']));
+				$dados['nome_produto'] = addslashes(trim($_POST['nome_produto_edit']));
 			}
 
 			if (!empty(trim($_POST['descricao_edit'] ?? ''))) {
@@ -111,10 +109,6 @@ class ProdutosController extends Controller
 
 			if (!empty($_POST['preco_edit'] ?? '')) {
 				$dados['preco'] = floatval($_POST['preco_edit']);
-			}
-
-			if (!empty($_POST['situacao_edit'] ?? '')) {
-				$dados['situacao'] = $_POST['situacao_edit'];
 			}
 
 			if (empty($dados)) {
