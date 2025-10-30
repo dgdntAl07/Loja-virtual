@@ -14,7 +14,7 @@ function is_email(string $email)
 
 function is_passwd(string $password)
 {
-	if(password_get_info($password)['algo']){
+	if (password_get_info($password)['algo']) {
 		return true;
 	}
 	return (mb_strlen($password) >= CONF_PASSWD_MIN_LEN && mb_strlen($password) <= CONF_PASSWD_MAX_LEN ? true : false);
@@ -26,7 +26,7 @@ function passwd(string $password)
 }
 
 function passwd_verify(string $password, string $hash)
-{	
+{
 	return password_verify($password, $hash);
 }
 
@@ -38,15 +38,15 @@ function passwd_rehash(string $hash)
 function csrf_input()
 {
 	session()->csrf();
-	return "<input type='text' name='csrf' value='".(session()->csrf_token ?? "")."'/>";
+	return "<input type='text' name='csrf' value='" . (session()->csrf_token ?? "") . "'/>";
 }
 
 function csrf_verify($request)
 {
-	if(empty(session()->csrf_token) || empty($request['csrf']) || $request['csrf'] != session()->csrf_token){
+	if (empty(session()->csrf_token) || empty($request['csrf']) || $request['csrf'] != session()->csrf_token) {
 		return false;
 	}
-	return true;	
+	return true;
 }
 
 /**
@@ -62,8 +62,12 @@ function str_slug(string $string)
 	$formats = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜüÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿRr"!@#$%&*()_-+={[}]/?;:.,\\\'<>°ºª';
 	$replace = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr                                 ';
 
-	$slug = str_replace(["-----", "----", "---", "--"], "-", 
-		str_replace(" ", "-", 
+	$slug = str_replace(
+		["-----", "----", "---", "--"],
+		"-",
+		str_replace(
+			" ",
+			"-",
 			trim(strtr(utf8_decode($string), utf8_decode($formats), $replace))
 		)
 	);
@@ -90,7 +94,7 @@ function str_limit_words(string $string, int $limit, string $pointer = "...")
 	$arrWords = explode(" ", $string);
 	$numWords = count($arrWords);
 
-	if($numWords < $limit){
+	if ($numWords < $limit) {
 		return $string;
 	}
 
@@ -100,7 +104,7 @@ function str_limit_words(string $string, int $limit, string $pointer = "...")
 function str_limit_chars(string $string, int $limit, string $pointer = "...")
 {
 	$string = trim(filter_var($string, FILTER_SANITIZE_SPECIAL_CHARS));
-	if(mb_strlen($string) <= $limit){
+	if (mb_strlen($string) <= $limit) {
 		return $string;
 	}
 	$chars = mb_substr($string, 0, mb_strrpos(mb_substr($string, 0, $limit), " "));
@@ -113,14 +117,16 @@ function str_limit_chars(string $string, int $limit, string $pointer = "...")
  * #################
  */
 
-function difference_days_between_dates($date1, $date2){
+function difference_days_between_dates($date1, $date2)
+{
 	$difference = strtotime($date2) - strtotime($date1);
 	return abs(round($difference / 86400));
 }
 
-function numberReplace($value){
+function numberReplace($value)
+{
 	$value_replace = str_replace('.', '', $value);
-    $value = str_replace(',', '.', $value_replace);
+	$value = str_replace(',', '.', $value_replace);
 	return $value;
 }
 
@@ -134,14 +140,14 @@ function numberReplace($value){
 
 function url(string $path)
 {
-	return BASE_URL .($path[0] == "/" ? mb_substr($path, 1) : $path);
+	return BASE_URL . ($path[0] == "/" ? mb_substr($path, 1) : $path);
 }
 
 function redirect(string $url)
 {
 	header("HTTP/1.1 302 Redirect");
-	if(filter_var($url, FILTER_VALIDATE_URL)){
-		header("Location: {$url}");		
+	if (filter_var($url, FILTER_VALIDATE_URL)) {
+		header("Location: {$url}");
 		exit;
 	}
 	$location = url($url);
@@ -183,6 +189,53 @@ function users()
  * ##############
  */
 
-function customCSS($file_name){
-	return "<link rel='stylesheet' href='".BASE_URL."Assets/css/".$file_name.".css'/>";
+function customCSS($file_name)
+{
+	return "<link rel='stylesheet' href='" . BASE_URL . "Assets/css/" . $file_name . ".css'/>";
+}
+
+
+/**
+ * ###################
+ * ### UPLOAD FILE ###
+ * ###################
+ */
+
+function uploaded_file($file, $folder)
+{
+
+	$file_name = $file['name'];
+	$extension_file = pathinfo($file_name, PATHINFO_EXTENSION);
+
+	if (extensionIsValid($extension_file)) {
+
+		$tmp_name = $file['tmp_name'];
+		$file_name = pathinfo($file_name, PATHINFO_FILENAME);
+		$file_renaming = trim($file_name) . '_' . uniqid() . '.' . $extension_file;
+
+		$folder_path = $folder . $file_renaming;
+
+		if (!file_exists($folder)) {
+			mkdir($folder, 0755, true);
+		}
+
+		if (move_uploaded_file($tmp_name, $folder_path)) {
+			return $folder_path;
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
+}
+
+function extensionIsValid(string $extension_file)
+{
+	$extension_allowed = ['jpg', 'jpeg', 'png', 'svg', 'webp', 'JPG', 'JPEG', 'PNG', 'SVG', 'WEBP'];
+
+	if (in_array($extension_file, $extension_allowed)) {
+		return true;
+	} else {
+		return false;
+	}
 }

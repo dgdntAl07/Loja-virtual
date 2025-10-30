@@ -11,33 +11,28 @@ class Produtos extends Model
     }
 
     // Adicionar produtos 
-    public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria)
+    public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $upload)
     {
-        $sql = $this->db->prepare("INSERT INTO produtos SET nome_produto = :nome, descricao = :descricao, quantidade = :quantidade, preco = :preco, categoria = :categoria");
+        $sql = $this->db->prepare("INSERT INTO produtos SET 
+        nome_produto = :nome, 
+        descricao = :descricao, 
+        quantidade = :quantidade, 
+        preco = :preco, 
+        categoria = :categoria, 
+        imagens = :imagem");
+
         $sql->bindValue(":nome", $nome_produto);
         $sql->bindValue(":descricao", $descricao);
         $sql->bindValue(":quantidade", $quantidade);
         $sql->bindValue(":preco", $preco);
         $sql->bindValue(":categoria", $categoria);
+        $sql->bindParam(":imagem", $upload);
         $sql->execute();
 
         return True;
     }
 
-    // Ler produtos
-    public function getInfo($id)
-    {
-        $sql = $this->db->prepare("SELECT * FROM produtos WHERE id = :id");
-        $sql->bindValue(":id", $id);
-        $sql->execute();
-
-        if ($sql->rowCount() > 0) {
-            return $sql->fetch();
-        } else {
-            return array();
-        }
-    }
-
+    // Pega todos os itens que possuem a situação como 1
     public function getAll()
     {
         $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '1'");
@@ -48,28 +43,6 @@ class Produtos extends Model
             return array();
         }
     }
-
-    // Atualizar/Editar produtos
-    // public function atualizarProdutos($nome_produto_edit, $descricao_edit, $quantidade_edit, $categoria_edit, $preco_edit, $situacao_edit, $id)
-    // {
-    //     if ($this->existeProdutos($id)) {
-    //         $sql = $this->db->prepare("UPDATE produtos SET nome_produto = :nome_produto, 
-    //         descricao = :descricao, quantidade = :quantidade, preco = :preco, 
-    //         categoria = :categoria, situacao = :situacao WHERE id = :id");
-    //         $sql->bindValue(":nome_produto", $nome_produto_edit);
-    //         $sql->bindValue(":descricao", $descricao_edit);
-    //         $sql->bindValue(":quantidade", $quantidade_edit);
-    //         $sql->bindValue(":preco", $preco_edit);
-    //         $sql->bindValue(":categoria", $categoria_edit);
-    //         $sql->bindValue(":situacao", $situacao_edit);
-    //         $sql->bindValue(":id", $id);
-    //         $sql->execute();
-
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 
     public function atualizarProdutos($id, $dados)
     {
@@ -101,6 +74,7 @@ class Produtos extends Model
         }
     }
 
+    // Ler produtos
     private function existeProdutos($id)
     {
         $sql = $this->db->prepare('SELECT * FROM produtos WHERE id = :id');
@@ -132,6 +106,7 @@ class Produtos extends Model
         $sql->execute();
     }
 
+    // Mostra os Produtos que foram para a lixeira
     public function situacaoProduto()
     {
         $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '0'");
@@ -142,6 +117,8 @@ class Produtos extends Model
             return array();
         }
     }
+
+    // Muda a situação dos itens que estão na lixeira
     public function atualizarSituacaoLixeira($id, $dados = [])
     {
         if (empty($dados))

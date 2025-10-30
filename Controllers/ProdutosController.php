@@ -28,7 +28,7 @@ class ProdutosController extends Controller
 		$this->data['nivel-1'] = 'Produtos';
 		$this->data['produtos_list'] = $produtos->getAll();
 
-		
+
 		$this->loadTemplateAdmin("Admin/Produtos/index", $this->data);
 	}
 
@@ -52,15 +52,28 @@ class ProdutosController extends Controller
 			&& isset($_POST['quantidade']) && !empty($_POST['quantidade'])
 			&& isset($_POST['descricao']) && !empty($_POST['descricao'])
 			&& isset($_POST['preco']) && !empty($_POST['preco'])
+			&& isset($_GET['id']) && !empty($_GET['id'])
 		) {
 			$nome_produto = addslashes(trim($_POST['nome_produto']));
 			$quantidade = intval($_POST['quantidade']);
 			$descricao = addslashes(trim($_POST['descricao']));
-			$preco = floatval($_POST['preco']);
+			$preco = $_POST['preco'];
 			$categoria = $_POST['categoria'];
+			$id = intval($_GET['id']);
 
-			$produtos->adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria);
+			if(isset($_FILES["imagem"]) && !empty($_FILES["imagem"])){
+				$folder = 'Assets/uploads/imagem/'. $id . "/";
+				$file = $_FILES['imagem'];
 
+				$upload = uploaded_file($file, $folder);
+
+				if($upload !== false){
+					$produtos->adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $upload);
+				} else {
+					$upload = '';
+				}
+			}
+			
 		}
 
 		redirect('Produtos');
@@ -84,6 +97,7 @@ class ProdutosController extends Controller
 		 * o array pega o que foi enviado para alterar
 		 */
 
+		// Pega o id como parametro principal
 		if (isset($_POST['id_produto_edit']) && !empty($_POST['id_produto_edit'])) {
 
 			$id = intval($_POST['id_produto_edit']);
