@@ -10,6 +10,8 @@ class Produtos extends Model
         return $this->permissions->hasPermission($name);
     }
 
+    ###  Estoque  ###
+
     // Adicionar produtos 
     public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $upload)
     {
@@ -27,7 +29,7 @@ class Produtos extends Model
             $sql->bindValue(":upload", $upload);
 
             $ret = $sql->execute();
-            var_dump($ret, $this->db->lastInsertId());
+            // var_dump($ret, $this->db->lastInsertId());
             return $ret;
         } catch (PDOException $e) {
             echo "Erro SQL: " . $e->getMessage();
@@ -89,24 +91,20 @@ class Produtos extends Model
             return false;
         }
     }
-
-    // Deletar produtos
-    public function excluirPeloID($id)
+    
+    public function getId()
     {
-        $sql = 'DELETE FROM produtos WHERE id = :id';
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(':id', $id);
-        $sql->execute();
+        $sql = $this->db->query("SELECT id FROM produtos ORDER BY id DESC LIMIT 1");
+        
+        if ($sql->rowCount() > 0) {
+            // Retorna como array associativo
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return ['id' => 0];
+        }
     }
-
-    // Atualiza a situação (ativo/inativo) de um produto
-    public function atualizarSituacaoProduto($id)
-    {
-        $sql = "UPDATE produtos SET situacao = '0' WHERE id = :id";
-        $sql = $this->db->prepare($sql);
-        $sql->bindValue(":id", $id);
-        $sql->execute();
-    }
+    
+    ###  Lixeira  ###
 
     public function situacaoProduto()
     {
@@ -117,6 +115,14 @@ class Produtos extends Model
         } else {
             return array();
         }
+    }
+    
+    public function atualizarSituacaoProduto($id)
+    {
+        $sql = "UPDATE produtos SET situacao = '0' WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
     }
 
     public function atualizarSituacaoLixeira($id, $dados = [])
@@ -140,19 +146,11 @@ class Produtos extends Model
         return $stmt->execute();
     }
 
-    public function getId()
-    {
-        $sql = $this->db->query("SELECT id FROM produtos ORDER BY id DESC LIMIT 1");
-
-        if ($sql->rowCount() > 0) {
-            // Retorna como array associativo
-            return $sql->fetch(PDO::FETCH_ASSOC);
-        } else {
-            return ['id' => 0];
-        }
-    }
-
-    public function delProduto(){
-        $sql = $this->db->prepare("");
+    public function deletarProduto($id){
+    $sql = $this->db->prepare("DELETE FROM produtos WHERE id = :id");
+        $sql->bindValue(":id", $id );
+        $sql->execute();
     }
 }
+
+

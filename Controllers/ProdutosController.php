@@ -87,9 +87,6 @@ class ProdutosController extends Controller
 		exit;
 	}
 
-
-
-
 	public function editProduto()
 	{
 		$produtos = new Produtos();
@@ -143,7 +140,10 @@ class ProdutosController extends Controller
 			redirect('Produtos');
 			exit;
 		} else {
-			echo "ID do produtos$produtos não informado.";
+			echo "ID do produto não informado.";
 		}
+
 	}
+
+	
 }

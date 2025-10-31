@@ -27,7 +27,7 @@ class LoginController extends Controller
 					}else{						
 						//então tentamos fazer o login com a senha
 						if($user->doLogin($post["email"], $post["passwd"])){
-							header("Location: ".BASE_URL."Home");
+							header("Location: ".BASE_URL."Login");
 							exit;
 						}else{
 							$data["alert"] = message()->error("Senha inválida.");

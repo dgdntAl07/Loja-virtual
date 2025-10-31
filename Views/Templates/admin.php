@@ -47,11 +47,22 @@
                             <i class="align-middle" data-feather="trending-up"></i> <span class="align-middle">DashBoard</span>
                         </a>
                     </li>
-                    
+
+                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Vendas")?'active':''; ?>">
+                        <a class="sidebar-link" href="<?=BASE_URL.'Vendas';?>">
+                            <i class="bi bi-calculator"></i> <span class="align-middle">Vendas</span>
+                        </a>
+                    </li>
 
                     <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Produto")?'active':''; ?>">
                         <a class="sidebar-link" href="<?=BASE_URL.'Produtos';?>">
-                            <i class="bi bi-shop"></i> <span class="align-middle">Produto</span>
+                            <i class="bi bi-stack"></i> <span class="align-middle">Estoque</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Relatorios")?'active':''; ?>">
+                        <a class="sidebar-link" href="<?=BASE_URL.'Relatorios';?>">
+                            <i class="bi bi-clipboard-data"></i> <span class="align-middle">Relatórios</span>
                         </a>
                     </li>
                     

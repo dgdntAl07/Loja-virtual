@@ -57,21 +57,31 @@ class LixeiraController extends Controller
     }
 
     public function enviarLixeira()
-{
-    $produtos = new Produtos();
+    {
+        $produtos = new Produtos();
 
-    if (isset($_POST['id_produto_excluir']) && !empty($_POST['id_produto_excluir'])) {
-        $id = intval($_POST['id_produto_excluir']);
+        if (isset($_POST['id_produto_excluir']) && !empty($_POST['id_produto_excluir'])) {
+            $id = intval($_POST['id_produto_excluir']);
 
-        // Atualiza a situação para 0
-        $dados = ['situacao' => 0];
-        $produtos->atualizarProdutos($id, $dados);
+            // Atualiza a situação para 0
+            $dados = ['situacao' => 0];
+            $produtos->atualizarProdutos($id, $dados);
 
-        redirect('Produtos');
-        exit;
-    } else {
-        echo "ID do produto não informado.";
+            redirect('Produtos');
+            exit;
+        } else {
+            echo "ID do produto não informado.";
+        }
     }
-}
 
+    public function delProduto()
+    {
+        if (isset($_POST['id_produto_excluir']) && !empty($_POST['id_produto_excluir'])) {
+            $id = intval($_POST['id_produto_excluir']);
+            $produtos = new Produtos();
+            $produtos->deletarProduto($id);
+        }
+
+        redirect('Lixeira');
+    }
 }

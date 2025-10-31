@@ -144,8 +144,8 @@
                                                         <strong><?= $produto_lixeira->nome_produto; ?></strong>?
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <form method="POST" action="<?= BASE_URL ?>Lixeira/restaurarProduto">
-                                                            <input type="hidden" name="id_produto_restaurar"
+                                                        <form method="POST" action="<?= BASE_URL ?>Lixeira/delProduto">
+                                                            <input type="hidden" name="id_produto_excluir"
                                                                 value="<?= $produto_lixeira->id; ?>">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Cancelar</button>
