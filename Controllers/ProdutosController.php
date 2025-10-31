@@ -38,36 +38,57 @@ class ProdutosController extends Controller
 	 */
 	public function create()
 	{
-		/** 
-		 * 01º VERIFICA OS CAMPOS NO IF
-		 * 02º RECEBE EM VARIAVEIS
-		 * 03º SALVA NO BANCO DE DADOS
-		 */
-
 		$produtos = new Produtos();
 
-		// Adicionando produtos
 		if (
-			isset($_POST['nome_produto']) && !empty($_POST['nome_produto'])
-			&& isset($_POST['quantidade']) && !empty($_POST['quantidade'])
-			&& isset($_POST['descricao']) && !empty($_POST['descricao'])
-			&& isset($_POST['preco']) && !empty($_POST['preco'])
-			&& isset($_POST['situacao']) && !empty($_POST['situacao'])
+			isset($_POST['nome_produto']) && !empty($_POST['nome_produto']) &&
+			isset($_POST['quantidade']) && !empty($_POST['quantidade']) &&
+			isset($_POST['descricao']) && !empty($_POST['descricao']) &&
+			isset($_POST['preco']) && !empty($_POST['preco'])
 		) {
 			$nome_produto = addslashes(trim($_POST['nome_produto']));
-			$quantidade = intval($_POST['quantidade']);
-			$descricao = addslashes(trim($_POST['descricao']));
-			$preco = floatval($_POST['preco']);
-			$categoria = $_POST['categoria'];
-			$situacao = $_POST['situacao'];
+			$quantidade   = intval($_POST['quantidade']);
+			$descricao    = addslashes(trim($_POST['descricao']));
+			$preco        = $_POST['preco'];
+			$categoria    = $_POST['categoria'];
 
-			$produtos->adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $situacao);
+			// Pega o último ID (para criar pasta enumerada)
+			$ultimo = $produtos->getId();
+			$id = isset($ultimo['id']) ? $ultimo['id'] + 1 : 1;
 
+			// Pasta de destino
+			$folder = 'Assets/Uploads/Produtos/' . $id . '/';
+			$upload = '';
+
+			// Se foi enviada imagem
+			if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === 0) {
+				$file = $_FILES['imagem'];
+				$upload = uploaded_file($file, $folder);
+			}
+
+			// echo "<pre>";
+			// var_dump($upload);
+			// exit;
+
+			$produtos->adicionarProdutos(
+				$nome_produto,
+				$descricao,
+				$quantidade,
+				$preco,
+				$categoria,
+				$upload
+			);
+
+			redirect('Produtos');
+			exit;
 		}
 
 		redirect('Produtos');
 		exit;
 	}
+
+
+
 
 	public function editProduto()
 	{
@@ -80,51 +101,11 @@ class ProdutosController extends Controller
 		 * 03º retornar para a view
 		 * 
 		 * pega o id como parametro principal
-		 * cria o array
+		 * criar o array
 		 * Fazer um if pra cada e colocar em um array
 		 * passa o array e o id 
 		 * o array pega o que foi enviado para alterar
 		 */
-
-
-		
-		// Editar produtos
-		// if (
-		// 	isset($_POST['id_produto_edit']) && !empty($_POST['id_produto_edit'])
-		// 	&& isset($_POST['nome_produto_edit']) && !empty($_POST['nome_produto_edit'])
-		// 	&& isset($_POST['descricao_edit']) && !empty($_POST['descricao_edit'])
-		// 	&& isset($_POST['quantidade_edit']) && !empty($_POST['quantidade_edit'])
-		// 	&& isset($_POST['categoria_edit']) && !empty($_POST['categoria_edit'])
-		// 	&& isset($_POST['preco_edit']) && !empty($_POST['preco_edit'])
-		// 	&& isset($_POST['situacao_edit']) && !empty($_POST['situacao_edit'])
-		// ) {
-		// 	$id = addslashes($_POST['id_produto_edit']);
-		// 	$nome_produto_edit = addslashes($_POST['nome_produto_edit']);
-		// 	$descricao_edit = addslashes(trim($_POST['descricao_edit']));
-		// 	$quantidade_edit = intval($_POST['quantidade_edit']);
-		// 	$categoria_edit = $_POST['categoria_edit'];
-		// 	$preco_edit = floatval($_POST['preco_edit']);
-		// 	$situacao_edit = $_POST['situacao_edit'];
-
-		// 	if (empty(trim($nome_produto_edit))) {
-		// 		echo 'Não é possivel inserir espaços em brancos';
-		// 	} else {
-		// 		$produtos->atualizarProdutos(
-		// 			$nome_produto_edit,
-		// 			$descricao_edit,
-		// 			$quantidade_edit,
-		// 			$categoria_edit,
-		// 			$preco_edit,
-		// 			$situacao_edit,
-		// 			$id
-		// 		);
-
-		// 	}
-
-		// 	exit;
-		// } else {
-		// 	echo "Algo de errado";
-		// }
 
 		if (isset($_POST['id_produto_edit']) && !empty($_POST['id_produto_edit'])) {
 
@@ -134,7 +115,7 @@ class ProdutosController extends Controller
 			$dados = [];
 
 			if (!empty(trim($_POST['nome_produto_edit'] ?? ''))) {
-				$dados['nome'] = addslashes(trim($_POST['nome_produto_edit']));
+				$dados['nome_produto'] = addslashes(trim($_POST['nome_produto_edit']));
 			}
 
 			if (!empty(trim($_POST['descricao_edit'] ?? ''))) {
@@ -153,10 +134,6 @@ class ProdutosController extends Controller
 				$dados['preco'] = floatval($_POST['preco_edit']);
 			}
 
-			if (!empty($_POST['situacao_edit'] ?? '')) {
-				$dados['situacao'] = $_POST['situacao_edit'];
-			}
-
 			if (empty($dados)) {
 				echo "Nenhum campo foi alterado.";
 				exit;
@@ -165,34 +142,8 @@ class ProdutosController extends Controller
 			$produtos->atualizarProdutos($id, $dados);
 			redirect('Produtos');
 			exit;
-
 		} else {
-			echo "ID do produto não informado.";
+			echo "ID do produtos$produtos não informado.";
 		}
-
 	}
-
-	// public function situacaoProdutos()
-	// {
-	// 	$produto = new Produtos();
-
-	// 	if (!empty($_GET['id'])) {
-	// 		$id = intval($_GET['id']);
-
-	// 		if (isset($_GET['situacao']) && !empty($_GET['situacao'])) {
-	// 			$situacao = addslashes($_GET['situacao']);
-
-	// 			if ($situacao == 'Disponivel') {
-	// 				$situacao = 1;
-	// 			} else {
-	// 				$situacao = 0;
-	// 			}
-
-	// 			$produto->situacaoProduto($situacao, $id);
-	// 		}
-	// 	}
-	// }
-
-
 }
-

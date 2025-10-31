@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="<?= BASE_URL; ?>Assets/css/style.css">
 
     <!-- Bootstrap connection -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
@@ -17,16 +18,19 @@
     <?php if (isset($viewData['CSS'])) {
         echo $viewData['CSS'];
     }; ?>
+
     <title>Document</title>
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger border-bottom shadow-sm mb-3">
         <div class="container">
-            <a class="navbar-brand" href="#">Loja <strong>Virtual</strong></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="navbar-toggle-icon"></span>
+
+            <a class="navbar-brand" href="#">Loja<strong>Virtual</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbar-collapse">
+                <span class="navbar-toggle-icon">
+                    <i class="bi bi-list-nested"></i>
+                </span>
             </button>
 
             <div class="navbar-collapse collapse">
@@ -34,8 +38,15 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link text-white">Principal</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link text-white">Categorias</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Categorias</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Limpeza</a></li>
+                            <li><a class="dropdown-item" href="#">Perfumes</a></li>
+                            <li><a class="dropdown-item" href="#">Cósmeticos</a></li>
+                            <li><a class="dropdown-item" href="#">Brindes</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link text-white">Política de Privacidade</a>
@@ -43,13 +54,14 @@
                 </ul>
 
             </div>
+
             <div class="align-self-end">
                 <ul class="navbar-nav gap-2">
                     <li class="nav-item">
                         <a href="#" class="nav-link text-white">Cadastro</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-white">Login</a>
+                        <a href="<?= BASE_URL . "Login"; ?>" class="nav-link text-white">Login</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link text-white">
@@ -59,17 +71,36 @@
                         </a>
                     </li>
                 </ul>
+
             </div>
         </div>
     </nav>
 
     <!-- load content -->
     <?php $this->loadViewInTemplate($viewName, $viewData); ?>
+
     <!-- load JavaScript -->
     <?php if (isset($viewData['JS'])) {
         echo $viewData['JS'];
     }; ?>
 
+    <footer class="border-top fixed-bottom text-muted bg-light">
+        <div class="container">
+            <div class="row py-3">
+                <div class="col-12 col-md-4 text-center text-md-left">
+                    &copy 2025 - Loja Virtual
+                </div>
+                <div class="col-12 col-md-4 text-center">
+                    <a href="#" class="text-decoration-none text-dark">Politica de Privacidade</a>
+                </div>
+                <div class="col-12 col-md-4 text-center text-md-right">
+                    <a href="#" class="text-decoration-none text-dark">Administrar</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

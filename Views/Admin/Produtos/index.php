@@ -29,8 +29,7 @@
                             <div class="col-md-6 mt-2 text-end">
                                 <a data-bs-toggle="modal" data-bs-target="#addproduto" class="btn btn-secondary">+
                                     Adicionar produtos</a>
-                                <a data-bs-toggle="modal" data-bs-target="#lixeira" class="btn btn-danger">
-                                    Lixeira</a>
+                                <a href="<?= BASE_URL . "Lixeira"; ?>" class="btn btn-danger">Lixeira</a>
                             </div>
 
                             <!-- Modal de Adicionar Produto-->
@@ -43,7 +42,7 @@
                                                 aria-label="Close"></button>
                                         </div>
 
-                                        <form method="POST" action="<?= BASE_URL . 'Produtos/create'; ?>">
+                                        <form method="POST" enctype="multipart/form-data" action="<?= BASE_URL . 'Produtos/create'; ?>">
                                             <div class="modal-body">
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
@@ -67,7 +66,7 @@
                                                         <div class="form-group">
                                                             <label for="name" class="form-label">Quantidade</label>
                                                             <input type="text" id="quantidade" name="quantidade"
-                                                                class="form-control" placeholder="15" required>
+                                                                class="form-control" placeholder="Digite a quantidade..." required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -89,33 +88,19 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 mb-3">
+                                                    <div class="col-md-12 mb-3">
                                                         <div class="form-group">
                                                             <label for="name" class="form-label">Preço</label>
                                                             <input type="text" id="preco" name="preco"
-                                                                class="form-control" placeholder="Ex:R$20,00..."
+                                                                class="form-control" placeholder="Digite o preço do produto..."
                                                                 required>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 mb-3">
-                                                        <label for="name" class="form-label">Situação</label>
-                                                        <div class="d-flex">
-                                                            <div class="form-check m-2">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="situacao" id="flexRadioDefault1" value="1">
-                                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                                    Disponivel
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check m-2">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="situacao" id="flexRadioDefault2" value="0">
-                                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                                    Indisponivel
-                                                                </label>
-                                                            </div>
-                                                        </div>
+                                                    <div class="mb-3">
+                                                        <label for="formFile" class="form-label">Selecione uma imagem</label>
+                                                        <input class="form-control" name="imagem" type="file" id="formFile">
                                                     </div>
+
                                                     <div class="modal-footer d-flex justify-content-end">
                                                         <button type="button" class="btn btn-danger w-25"
                                                             data-bs-dismiss="modal">Cancelar</button>
@@ -130,72 +115,6 @@
                                 </div>
                             </div>
                             <!-- Fim do Modal de Adicionar -->
-
-                            <!-- Modal de Lixeira -->
-                            <div class="modal fade" id="lixeira" aria-hidden="true" tabindex="-1">
-                                <div class="modal-dialog modal-md modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            Lixeira
-                                            <button class="btn-close" type="button" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Produto</th>
-                                                        <th>Categoria</th>
-                                                        <th>Excluir</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php if (isset($produtos_list)): ?>
-                                                        <?php foreach ($produtos_list as $produto): ?>
-                                                            <tr>
-                                                                <td><?= $produto->id; ?></td>
-                                                                <td><?= $produto->nome_produto; ?></td>
-                                                                <td><?= $produto->categoria; ?></td>
-                                                                <td class="table-action">
-                                                                    <a data-bs-toggle="modal"
-                                                                        data-bs-target="#excluirproduto<?= $produto->id; ?>">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                            height="16" fill="currentColor"
-                                                                            class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                                            <path
-                                                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 
-                                                                                16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 
-                                                                                1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 
-                                                                                0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 
-                                                                                0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 
-                                                                                0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-                                                                        </svg>
-                                                                    </a>
-                                                                    <a data-bs-toggle="modal"
-                                                                        data-bs-target="#restaurarproduto<?= $produto->id; ?>">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                            height="16" fill="currentColor"
-                                                                            class="bi bi-arrow-counterclockwise"
-                                                                            viewBox="0 0 16 16">
-                                                                            <path fill-rule="evenodd"
-                                                                                d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z" />
-                                                                            <path
-                                                                                d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466" />
-                                                                        </svg>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Fim do Modal de Lixeira -->
-
 
                         </div>
                     </div>
@@ -236,7 +155,7 @@
                                 <th>Produto</th>
                                 <th>Quantidade</th>
                                 <th>Descrição</th>
-                                <th>Situação</th>
+                                <th>Status</th>
                                 <th>Preço</th>
                                 <th>Categoria</th>
                                 <th>Ações</th>
@@ -253,7 +172,7 @@
                                             <td class="<?= $produto->quantidade > 0 ? 'table-success' : 'table-danger'; ?>">
                                                 <?= $produto->quantidade > 0 ? "Disponivel" : "Indisponivel"; ?>
                                             </td>
-                                            <td><?= $produto->preco; ?></td>
+                                            <td><?= "R$" . number_format($produto->preco, 2, ',', '.'); ?></td>
                                             <td><?= $produto->categoria; ?></td>
                                             <td class="table-action">
                                                 <a data-bs-toggle="modal" data-bs-target="#editproduto<?= $produto->id; ?>">
@@ -263,11 +182,10 @@
                                                             d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
                                                     </svg>
                                                 </a>
-                                                <a data-bs-toggle="modal" data-bs-target="#removerproduto<?= $produto->id; ?>">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+                                                <a data-bs-toggle="modal" data-bs-target="#enviarLixeira<?= $produto->id; ?>">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                                                     </svg>
                                                 </a>
                                             </td>
@@ -331,36 +249,19 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6 mb-3">
+                                                                <div class="col-md-12 mb-3">
                                                                     <div class="form-group">
                                                                         <label for="name" class="form-label">Preço</label>
                                                                         <input type="text" id="preco" name="preco_edit"
-                                                                            class="form-control" placeholder="Ex: R$20.00">
+                                                                            class="form-control" placeholder="<?= number_format($produto->preco, 2, ',', '.'); ?>">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-12 mb-3">
-                                                                    <label for="name" class="form-label">Situação</label>
-                                                                    <div class="d-flex">
-                                                                        <div class="form-check m-2">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="situacao_edit" id="flexRadioDefault1"
-                                                                                value="1">
-                                                                            <label class="form-check-label"
-                                                                                for="flexRadioDefault1">
-                                                                                Disponivel
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="form-check m-2">
-                                                                            <input class="form-check-input" type="radio"
-                                                                                name="situacao_edit" id="flexRadioDefault2"
-                                                                                value="0">
-                                                                            <label class="form-check-label"
-                                                                                for="flexRadioDefault2">
-                                                                                Indisponivel
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
+
+                                                                <div class="mb-3">
+                                                                    <label for="formFile" class="form-label">Selecione uma imagem</label>
+                                                                    <input class="form-control" name="imagem" type="file" id="formFile">
                                                                 </div>
+
                                                                 <div class="modal-footer d-flex justify-content-end">
                                                                     <button type="button" class="btn btn-danger w-25"
                                                                         data-bs-dismiss="modal">Cancelar</button>
@@ -377,25 +278,27 @@
                                         </div>
                                         <!-- Fim Modal Editar -->
 
-                                        <!-- Modal de Remover Produto -->
-                                        <div class="modal fade" id="removerproduto<?= $produto->id; ?>" tabindex="-1"
-                                            role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <!-- Modal de Remoção do Produto -->
+                                        <div class="modal fade" id="enviarLixeira<?= $produto->id; ?>" tabindex="-1"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Confirmação de Remoção</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                                    <div class="modal-header bg-danger text-white">
+                                                        <h5 class="modal-title">Enviar para Lixeira</h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"></button>
                                                     </div>
-                                                    <div class="modal-body ">
-                                                        <form method="POST" action=" <?= BASE_URL . 'Produtos/ #'; ?> ">
-                                                            <p>Tem certeza que deseja remover este item da sua lista de
-                                                                produtos?
-                                                            </p>
-                                                            <h6>Este item ainda poderá ser restaurado na lixeira.</h6>
+                                                    <div class="modal-body">
+                                                        Tem certeza que deseja enviar o produto
+                                                        <strong><?= $produto->nome_produto; ?></strong> para a lixeira?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <form method="POST" action="<?= BASE_URL ?>Lixeira/enviarLixeira">
+                                                            <input type="hidden" name="id_produto_excluir"
+                                                                value="<?= $produto->id; ?>">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-bs-dismiss="modal">Cancelar</button>
-                                                            <button type="button" class="btn btn-danger">Remover</button>
+                                                            <button type="submit" class="btn btn-danger">Enviar</button>
                                                         </form>
                                                     </div>
                                                 </div>

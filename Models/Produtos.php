@@ -2,10 +2,8 @@
 
 class Produtos extends Model
 {
-    private $produtoInfo;
+
     private $permissions;
-
-
 
     public function hasPermission($name)
     {
@@ -13,37 +11,34 @@ class Produtos extends Model
     }
 
     // Adicionar produtos 
-    public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $situacao)
+    public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $upload)
     {
-        $sql = $this->db->prepare("INSERT INTO produtos SET nome_produto = :nome, descricao = :descricao, quantidade = :quantidade, preco = :preco, situacao = :situacao, categoria = :categoria");
-        $sql->bindValue(":nome", $nome_produto);
-        $sql->bindValue(":descricao", $descricao);
-        $sql->bindValue(":quantidade", $quantidade);
-        $sql->bindValue(":preco", $preco);
-        $sql->bindValue(":situacao", $situacao);
-        $sql->bindValue(":categoria", $categoria);
-        $sql->execute();
+        try {
+            $sql = $this->db->prepare("
+            INSERT INTO produtos (nome_produto, descricao, quantidade, preco, categoria, imagens)
+            VALUES (:nome, :descricao, :quantidade, :preco, :categoria, :upload)
+        ");
 
-        return True;
-    }
+            $sql->bindValue(":nome", $nome_produto);
+            $sql->bindValue(":descricao", $descricao);
+            $sql->bindValue(":quantidade", $quantidade);
+            $sql->bindValue(":preco", $preco);
+            $sql->bindValue(":categoria", $categoria);
+            $sql->bindValue(":upload", $upload);
 
-    // Ler produtos
-    public function getInfo($id)
-    {
-        $sql = $this->db->prepare("SELECT * FROM produtos WHERE id = :id");
-        $sql->bindValue(":id", $id);
-        $sql->execute();
-
-        if ($sql->rowCount() > 0) {
-            return $sql->fetch();
-        } else {
-            return array();
+            $ret = $sql->execute();
+            var_dump($ret, $this->db->lastInsertId());
+            return $ret;
+        } catch (PDOException $e) {
+            echo "Erro SQL: " . $e->getMessage();
+            return false;
         }
     }
 
+    // Ler produtos
     public function getAll()
     {
-        $sql = $this->db->query("SELECT * FROM produtos");
+        $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '1'");
 
         if ($sql->rowCount() > 0) {
             return $sql->fetchAll();
@@ -52,33 +47,11 @@ class Produtos extends Model
         }
     }
 
-    // Atualizar/Editar produtos
-    // public function atualizarProdutos($nome_produto_edit, $descricao_edit, $quantidade_edit, $categoria_edit, $preco_edit, $situacao_edit, $id)
-    // {
-    //     if ($this->existeProdutos($id)) {
-    //         $sql = $this->db->prepare("UPDATE produtos SET nome_produto = :nome_produto, 
-    //         descricao = :descricao, quantidade = :quantidade, preco = :preco, 
-    //         categoria = :categoria, situacao = :situacao WHERE id = :id");
-    //         $sql->bindValue(":nome_produto", $nome_produto_edit);
-    //         $sql->bindValue(":descricao", $descricao_edit);
-    //         $sql->bindValue(":quantidade", $quantidade_edit);
-    //         $sql->bindValue(":preco", $preco_edit);
-    //         $sql->bindValue(":categoria", $categoria_edit);
-    //         $sql->bindValue(":situacao", $situacao_edit);
-    //         $sql->bindValue(":id", $id);
-    //         $sql->execute();
-
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
     public function atualizarProdutos($id, $dados)
     {
-        
+
         if ($this->existeProdutos($id)) {
-            
+
             if (empty($dados)) {
                 return false;
             }
@@ -104,7 +77,6 @@ class Produtos extends Model
         }
     }
 
-
     private function existeProdutos($id)
     {
         $sql = $this->db->prepare('SELECT * FROM produtos WHERE id = :id');
@@ -127,17 +99,60 @@ class Produtos extends Model
         $sql->execute();
     }
 
-
-
     // Atualiza a situação (ativo/inativo) de um produto
-    public function situacaoProduto($situacao, $id)
+    public function atualizarSituacaoProduto($id)
     {
-        $sql = $this->db->prepare("UPDATE produtos SET situacao = :situacao WHERE id = :id");
-        $sql->bindValue(':situacao', $situacao);
-        $sql->bindValue(':id', $id);
+        $sql = "UPDATE produtos SET situacao = '0' WHERE id = :id";
+        $sql = $this->db->prepare($sql);
+        $sql->bindValue(":id", $id);
         $sql->execute();
-
-        return true;
     }
 
+    public function situacaoProduto()
+    {
+        $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '0'");
+
+        if ($sql->rowCount() > 0) {
+            return $sql->fetchAll();
+        } else {
+            return array();
+        }
+    }
+
+    public function atualizarSituacaoLixeira($id, $dados = [])
+    {
+        if (empty($dados))
+            return false;
+
+        $campos = [];
+        foreach ($dados as $chave => $valor) {
+            $campos[] = "$chave = :$chave";
+        }
+
+        $sql = "UPDATE produtos SET " . implode(', ', $campos) . " WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+
+        foreach ($dados as $chave => $valor) {
+            $stmt->bindValue(":$chave", $valor);
+        }
+
+        $stmt->bindValue(":id", $id);
+        return $stmt->execute();
+    }
+
+    public function getId()
+    {
+        $sql = $this->db->query("SELECT id FROM produtos ORDER BY id DESC LIMIT 1");
+
+        if ($sql->rowCount() > 0) {
+            // Retorna como array associativo
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return ['id' => 0];
+        }
+    }
+
+    public function delProduto(){
+        $sql = $this->db->prepare("");
+    }
 }
