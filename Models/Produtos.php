@@ -13,29 +13,11 @@ class Produtos extends Model
     // Adicionar produtos 
     public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $upload)
     {
-<<<<<<< HEAD
         try {
             $sql = $this->db->prepare("
             INSERT INTO produtos (nome_produto, descricao, quantidade, preco, categoria, imagens)
             VALUES (:nome, :descricao, :quantidade, :preco, :categoria, :upload)
         ");
-=======
-        $sql = $this->db->prepare("INSERT INTO produtos SET 
-        nome_produto = :nome, 
-        descricao = :descricao, 
-        quantidade = :quantidade, 
-        preco = :preco, 
-        categoria = :categoria, 
-        imagens = :imagem");
-
-        $sql->bindValue(":nome", $nome_produto);
-        $sql->bindValue(":descricao", $descricao);
-        $sql->bindValue(":quantidade", $quantidade);
-        $sql->bindValue(":preco", $preco);
-        $sql->bindValue(":categoria", $categoria);
-        $sql->bindParam(":imagem", $upload);
-        $sql->execute();
->>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
 
             $sql->bindValue(":nome", $nome_produto);
             $sql->bindValue(":descricao", $descricao);
@@ -44,7 +26,6 @@ class Produtos extends Model
             $sql->bindValue(":categoria", $categoria);
             $sql->bindValue(":upload", $upload);
 
-<<<<<<< HEAD
             $ret = $sql->execute();
             var_dump($ret, $this->db->lastInsertId());
             return $ret;
@@ -55,9 +36,6 @@ class Produtos extends Model
     }
 
     // Ler produtos
-=======
-    // Pega todos os itens que possuem a situação como 1
->>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
     public function getAll()
     {
         $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '1'");
@@ -99,7 +77,6 @@ class Produtos extends Model
         }
     }
 
-    // Ler produtos
     private function existeProdutos($id)
     {
         $sql = $this->db->prepare('SELECT * FROM produtos WHERE id = :id');
@@ -131,7 +108,6 @@ class Produtos extends Model
         $sql->execute();
     }
 
-    // Mostra os Produtos que foram para a lixeira
     public function situacaoProduto()
     {
         $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '0'");
@@ -143,10 +119,6 @@ class Produtos extends Model
         }
     }
 
-<<<<<<< HEAD
-=======
-    // Muda a situação dos itens que estão na lixeira
->>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
     public function atualizarSituacaoLixeira($id, $dados = [])
     {
         if (empty($dados))

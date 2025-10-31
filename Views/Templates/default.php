@@ -43,14 +43,9 @@
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Categorias</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Limpeza</a></li>
-<<<<<<< HEAD
                             <li><a class="dropdown-item" href="#">Perfumes</a></li>
                             <li><a class="dropdown-item" href="#">Cósmeticos</a></li>
                             <li><a class="dropdown-item" href="#">Brindes</a></li>
-=======
-                            <li><a class="dropdown-item" href="#">Cosmeticos</a></li>
-                            <li><a class="dropdown-item" href="#">Perfumes</a></li>
->>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
                         </ul>
                     </li>
                     <li class="nav-item">
