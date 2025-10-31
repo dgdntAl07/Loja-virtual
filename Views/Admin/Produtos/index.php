@@ -92,6 +92,7 @@
                                                         <div class="form-group">
                                                             <label for="name" class="form-label">Preço</label>
                                                             <input type="text" id="preco" name="preco"
+<<<<<<< HEAD
                                                                 class="form-control" placeholder="Digite o preço do produto..."
                                                                 required>
                                                         </div>
@@ -99,6 +100,17 @@
                                                     <div class="mb-3">
                                                         <label for="formFile" class="form-label">Selecione uma imagem</label>
                                                         <input class="form-control" name="imagem" type="file" id="formFile">
+=======
+                                                                class="form-control"
+                                                                placeholder="Digite o valor do seu produto" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <label for="name" class="form-label">Selecione uma imagem</label>
+                                                    <div class="input-group mb-3">
+                                                        <input type="file" name="imagem" class="form-control"
+                                                            id="inputFile">
+>>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
                                                     </div>
 
                                                     <div class="modal-footer d-flex justify-content-end">
@@ -172,7 +184,11 @@
                                             <td class="<?= $produto->quantidade > 0 ? 'table-success' : 'table-danger'; ?>">
                                                 <?= $produto->quantidade > 0 ? "Disponivel" : "Indisponivel"; ?>
                                             </td>
+<<<<<<< HEAD
                                             <td><?= "R$" . number_format($produto->preco, 2, ',', '.'); ?></td>
+=======
+                                            <td><?= number_format($produto->preco, 2, ",", "."); ?></td>
+>>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
                                             <td><?= $produto->categoria; ?></td>
                                             <td class="table-action">
                                                 <a data-bs-toggle="modal" data-bs-target="#editproduto<?= $produto->id; ?>">
@@ -183,9 +199,16 @@
                                                     </svg>
                                                 </a>
                                                 <a data-bs-toggle="modal" data-bs-target="#enviarLixeira<?= $produto->id; ?>">
+<<<<<<< HEAD
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
                                                         <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+=======
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-trash3 danger" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+>>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
                                                     </svg>
                                                 </a>
                                             </td>
@@ -253,6 +276,7 @@
                                                                     <div class="form-group">
                                                                         <label for="name" class="form-label">Preço</label>
                                                                         <input type="text" id="preco" name="preco_edit"
+<<<<<<< HEAD
                                                                             class="form-control" placeholder="<?= number_format($produto->preco, 2, ',', '.'); ?>">
                                                                     </div>
                                                                 </div>
@@ -262,6 +286,41 @@
                                                                     <input class="form-control" name="imagem" type="file" id="formFile">
                                                                 </div>
 
+=======
+                                                                            class="form-control"
+                                                                            placeholder="<?= $produto->preco; ?>">
+                                                                    </div>
+                                                                </div>
+
+                                                                <label for="name" class="form-label">Selecione uma imagem</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="file" name="imagem" class="form-control"
+                                                                        id="inputFile">
+                                                                </div>
+                                                                <!-- <div class="col-md-12 mb-3">
+                                                                    <label for="name" class="form-label">Situação</label>
+                                                                    <div class="d-flex">
+                                                                        <div class="form-check m-2">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="situacao_edit" id="flexRadioDefault1"
+                                                                                value="1">
+                                                                            <label class="form-check-label"
+                                                                                for="flexRadioDefault1">
+                                                                                Disponivel
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check m-2">
+                                                                            <input class="form-check-input" type="radio"
+                                                                                name="situacao_edit" id="flexRadioDefault2"
+                                                                                value="0">
+                                                                            <label class="form-check-label"
+                                                                                for="flexRadioDefault2">
+                                                                                Indisponivel
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
+>>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
                                                                 <div class="modal-footer d-flex justify-content-end">
                                                                     <button type="button" class="btn btn-danger w-25"
                                                                         data-bs-dismiss="modal">Cancelar</button>
@@ -278,7 +337,11 @@
                                         </div>
                                         <!-- Fim Modal Editar -->
 
+<<<<<<< HEAD
                                         <!-- Modal de Remoção do Produto -->
+=======
+                                        <!-- Modal de Remoção de Produto -->
+>>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
                                         <div class="modal fade" id="enviarLixeira<?= $produto->id; ?>" tabindex="-1"
                                             aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">

@@ -194,6 +194,10 @@ function customCSS($file_name)
 	return "<link rel='stylesheet' href='" . BASE_URL . "Assets/css/" . $file_name . ".css'/>";
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
 /**
  * ###################
  * ### UPLOAD FILE ###
@@ -237,4 +241,8 @@ function extensionIsValid(string $extension_file)
 	} else {
 		return false;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 41b1db8a17efab09f9ac30aefa7c24913b349779
