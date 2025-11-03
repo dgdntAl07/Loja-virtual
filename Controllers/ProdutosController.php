@@ -25,7 +25,7 @@ class ProdutosController extends Controller
 
 		$produtos = new Produtos();
 
-		$this->data['nivel-1'] = 'Produtos';
+		$this->data['nivel-1'] = 'Estoque';
 		$this->data['produtos_list'] = $produtos->getAll();
 
 

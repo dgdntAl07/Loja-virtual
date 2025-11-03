@@ -19,7 +19,7 @@
         echo $viewData['CSS'];
     }; ?>
 
-    <title>Document</title>
+    <title>Home</title>
 </head>
 
 <body>

@@ -9,6 +9,6 @@ class CarrinhoController extends Controller {
     
     public function index()
 	{
-        $this->loadView('Home/Carrinho/index', $this->data);
+        $this->loadTemplateSite('Home/Carrinho/index', $this->data);
 	}
 }

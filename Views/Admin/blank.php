@@ -23,6 +23,65 @@
 						<h5 class="card-title mb-0">Empty card</h5>
 					</div>
 					<div class="card-body">
+						<div class="row d-flex justify-content-evenly">
+							<div class="col-md-4">
+								<h6 class="text-center">Produtos Mais Vendidos</h6>
+								<canvas id="grafico1"></canvas>
+							</div>
+							<div class="col-md-4">
+								<h6 class="text-center">Vendas do Ano</h6>
+								<canvas id="grafico2"></canvas>
+							</div>
+						</div>
+
+						<!-- Gráfico de Vendas-->
+						<script>
+							const ctx = document.getElementById('grafico1');
+
+							new Chart(ctx, {
+								type: 'pie',
+								data: {
+									labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+									datasets: [{
+										label: '# of Votes',
+										data: [12, 16, 3, 5, 2, 3],
+										borderWidth: 1
+									}]
+								},
+								options: {
+									scales: {
+										y: {
+											beginAtZero: true
+										}
+									}
+								}
+							});
+						</script>
+
+						<!-- Gráfico de Produtos Mais Vendidos -->
+						<script>
+							const ctx2 = document.getElementById('grafico2');
+
+							new Chart(ctx2, {
+								type: 'pie',
+								data: {
+									labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+									datasets: [{
+										label: '# of Votes',
+										data: [12, 16, 3, 5, 2, 3],
+										borderWidth: 1
+									}]
+								},
+								options: {
+									scales: {
+										y: {
+											beginAtZero: true
+										}
+									}
+								}
+							});
+						</script>
+
 					</div>
 				</div>
 			</div>

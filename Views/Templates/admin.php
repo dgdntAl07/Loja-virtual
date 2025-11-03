@@ -17,6 +17,9 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     
+    <!-- Chart.JS -->
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- FAVICON -->
     <link rel="shortcut icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" />
     <link rel="icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" type="image/x-icon"/>
@@ -54,7 +57,7 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Produto")?'active':''; ?>">
+                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Estoque")?'active':''; ?>">
                         <a class="sidebar-link" href="<?=BASE_URL.'Produtos';?>">
                             <i class="bi bi-stack"></i> <span class="align-middle">Estoque</span>
                         </a>
