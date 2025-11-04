@@ -1,14 +1,14 @@
-
-body{
+body {
     margin: 0;
     background-color: #F5F5F5;
 }
 
-.container{
+.container {
     max-width: 1180px;
     margin: auto;
 }
-.info{
+
+.info {
     width: 100%;
     height: 60px;
     display: flex;
@@ -16,11 +16,12 @@ body{
     padding: 10px;
 }
 
-.info .title{
+.info .title {
     float: left;
     width: 60%;
 }
-.info .action_to_login{
+
+.info .action_to_login {
     width: 40%;
     float: right;
     line-height: 60px;
@@ -29,7 +30,29 @@ body{
     font-size: 18px;
 }
 
-a{
+a {
     text-decoration: none;
     color: #000;
+}
+
+/* Cards */
+.card-img-placeholder {
+    background-color: #d6d6d6;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.status-disponivel {
+    color: #198754;
+    font-weight: 600;
 }

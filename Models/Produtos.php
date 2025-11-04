@@ -39,15 +39,16 @@ class Produtos extends Model
 
     // Ler produtos
     public function getAll()
-    {
-        $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '1'");
+{
+    $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '1'");
 
-        if ($sql->rowCount() > 0) {
-            return $sql->fetchAll();
-        } else {
-            return array();
-        }
+    if ($sql->rowCount() > 0) {
+        return $sql->fetchAll(PDO::FETCH_OBJ); // 👈 forçar objeto
+    } else {
+        return [];
     }
+}
+
 
     public function atualizarProdutos($id, $dados)
     {
@@ -150,6 +151,14 @@ class Produtos extends Model
     $sql = $this->db->prepare("DELETE FROM produtos WHERE id = :id");
         $sql->bindValue(":id", $id );
         $sql->execute();
+    }
+
+    ### Carrinho ###
+    public function buscarPorId($id) {
+        $stmt = $this->db->prepare("SELECT * FROM produtos WHERE id = :id");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
 

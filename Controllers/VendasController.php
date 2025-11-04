@@ -15,7 +15,6 @@ class VendasController extends Controller {
 	}
 
     public function index(){
-
         $vendas = new Vendas();
 
         $this->data['nivel-1'] = 'Vendas';
