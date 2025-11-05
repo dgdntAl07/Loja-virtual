@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger border-bottom shadow-sm mb-3">
         <div class="container">
 
-            <a class="navbar-brand" href="#">Loja<strong>Virtual</strong></a>
+            <a class="navbar-brand" href="<?= BASE_URL; ?>">Loja<strong>Virtual</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbar-collapse">
                 <span class="navbar-toggle-icon">
                     <i class="bi bi-list-nested"></i>
@@ -84,7 +84,7 @@
         echo $viewData['JS'];
     }; ?>
 
-    <footer class="border-top text-muted bg-light">
+    <footer class="border-top text-muted align-content-lg-end bg-light">
         <div class="container">
             <div class="row py-3">
                 <div class="col-12 col-md-4 text-center text-md-left">

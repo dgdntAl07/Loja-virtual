@@ -155,10 +155,10 @@ class Produtos extends Model
 
     ### Carrinho ###
     public function buscarPorId($id) {
-        $stmt = $this->db->prepare("SELECT * FROM produtos WHERE id = :id");
-        $stmt->bindValue(':id', $id);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $sql = $this->db->prepare("SELECT * FROM produtos WHERE id = :id");
+        $sql->bindValue(':id', $id);
+        $sql->execute();
+        return $sql->fetch(PDO::FETCH_ASSOC);
     }
 }
 

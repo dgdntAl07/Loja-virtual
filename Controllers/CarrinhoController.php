@@ -2,11 +2,18 @@
 
 class CarrinhoController extends Controller
 {
+    private $data = array();
     private $produtos;
 
     public function __construct()
     {
         $this->produtos = new Produtos();
+    }
+
+    public function index()
+    {
+        $dados['carrinho'] = $_SESSION['carrinho'] ?? [];
+        $this->loadTemplateSite("Home/Carrinho/index", $dados);
     }
 
     public function adicionar()
@@ -29,25 +36,72 @@ class CarrinhoController extends Controller
         if (!$encontrado) {
             $_SESSION['carrinho'][] = [
                 'id' => $produto['id'],
-                'nome' => $produto['nome'],
+                'nome' => $produto['nome_produto'],
                 'preco' => $produto['preco'],
                 'quantidade' => 1
             ];
         }
 
-        require ('BASE_URL . "/Carrinho"');
+        header("Location: " . BASE_URL . "Carrinho");
         exit;
     }
 
-    public function index()
+    public function removercarrinho()
     {
-        $dados['carrinho'] = $_SESSION['carrinho'] ?? [];
-        $this->loadView("Carrinho/index", $dados);
+        $produtoId = $_POST['id_rmv_produto'];
+
+        if ($produtoId && isset($_SESSION['carrinho'])) {
+            foreach($_SESSION['carrinho'] as $index => $item) {
+                unset($_SESSION['carrinho'][$index]);
+                break;
+            }
+
+            $_SESSION['carrinho'] = array_values($_SESSION['carrinho']);
+            
+        }
+        header("Location: " . BASE_URL . "Carrinho");
+        exit;
+    }
+
+    public function subQuantCarrinho()
+    {
+        $produtoId = $_POST['produto_id'];
+
+        if ($produtoId && isset($_SESSION['carrinho'])) {
+            foreach ($_SESSION['carrinho'] as $index => $item) {
+                if ($item['id'] == $produtoId) {
+                    if ($item['quantidade'] > 1) {
+                        $item['quantidade']--;
+                    } 
+                    break;
+                }
+            }
+
+            $_SESSION['carrinho'] = array_values($_SESSION['carrinho']);
+        }
+
+        header("Location: " . BASE_URL . "Carrinho");
+        exit;
+    }
+
+    public function limparcarrinho()
+    {
+        $produtoId = $_POST['id_rmv_produto'];
+
+        if ($produtoId && isset($_SESSION['carrinho'])) {
+            foreach($_SESSION['carrinho'] as $index => $item) {
+                unset($_SESSION['carrinho'][$index]);
+            }
+
+            $_SESSION['carrinho'] = array_values($_SESSION['carrinho']);
+            
+        }
+        header("Location: " . BASE_URL . "Carrinho");
+        exit;
     }
 
     public function finalizarCompra()
     {
-        // Tlvz fazer
-        // inserir tabela vendas e itens_venda
+
     }
 }

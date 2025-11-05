@@ -39,7 +39,7 @@
 
 <main>
     <div class="container py-4">
-        <h2 class="mb-4 text-center">📦 Lista de Produtos</h2>
+        <h2 class="mb-4 text-center">Lista de Produtos</h2>
 
         <div class="row g-4">
             <?php if (!empty($produtos_list)): ?>
