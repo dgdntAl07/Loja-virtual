@@ -31,7 +31,56 @@
                         </div>
 					</div>
 					<div class="card-body">
-                        
+                        <?php if (isset($Erro) && !empty($Erro)): ?>
+                            <div class="row mb-3 d-flex justify-content-center">
+                                <div class="col-md-3">
+                                    <div class="alert alert-warning alert-dismissible" role="alert">
+                                        <button class="btn-close" type="button" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                        <div class="alert-message">
+                                            <?= $Erro; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if (isset($success) && !empty($success)): ?>
+                            <div class="row mb-3 d-flex justify-content-center">
+                                <div class="col-md-4">
+                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                        <div class="alert-message pe-5">
+                                            <?= $success; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+						<?php if(!isset($providerName)):?>
+
+							<table id="datatables-responsive" class="table dataTable no-footer dtr-inline table-hover"
+                            style="width: 100%;" role="grid" aria-describedby="datatables-responsive_info">
+							<thead>
+								<th>ID</th>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Preço</th>
+								<th>Total</th>
+                                <th>Categoria</th>
+                                <th>Ações</th>
+							</thead>
+							<tbody>
+
+							</tbody>
+							</table>
+
+						<?php else:?>
+							<p>Nenhum produto vendido</p>
+						<?php endif;?>
+							
 					</div>
 				</div>
 			</div>

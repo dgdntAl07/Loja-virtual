@@ -2,9 +2,9 @@
 
 class Vendas extends Model{
     
-    public function getVendas(){
 
+    public function registrarItem(){
+        $sql = $this->db->prepare(" ");
     }
-
 
 }
