@@ -2,11 +2,11 @@
 
 class CarrinhoController extends Controller
 {
-    private $produtos;
+    private $carrinho;
 
     public function __construct()
     {
-        $this->produtos = new Produtos();
+        $this->carrinho = new Carrinho();
     }
 
     public function index()
@@ -18,12 +18,13 @@ class CarrinhoController extends Controller
     public function adicionar()
     {
         $produtoId = $_POST['produto_id'];
-        $produto = $this->produtos->buscarPorId($produtoId);
+        $produto = $this->carrinho->buscarPorId($produtoId);
 
         if (!isset($_SESSION['carrinho'])) {
             $_SESSION['carrinho'] = [];
         }
 
+        // veirificar se tem produto no carrinho
         $encontrado = false;
         foreach ($_SESSION['carrinho'] as $i => $item) {
             if ($item['id'] == $produto['id']) {
@@ -33,6 +34,7 @@ class CarrinhoController extends Controller
             }
         }
 
+        // adicionar só se nn tiver produto
         if (!$encontrado) {
             $_SESSION['carrinho'][] = [
                 'id' => $produto['id'],
@@ -51,11 +53,13 @@ class CarrinhoController extends Controller
         $produtoId = $_POST['id_produto'];
 
         if ($produtoId && isset($_SESSION['carrinho'])) {
+
+            // Item 0: Caderno - R$10
             foreach ($_SESSION['carrinho'] as $index => $item) {
                 if ($item['id'] == $produtoId) {
                     $_SESSION['carrinho'][$index]['quantidade']--;
 
-                    // Se a quantidade zerar, remove o item
+                    // se a quantidade zerar, remove o item
                     if ($_SESSION['carrinho'][$index]['quantidade'] <= 0) {
                         unset($_SESSION['carrinho'][$index]);
                     }
@@ -100,6 +104,7 @@ class CarrinhoController extends Controller
                 }
             }
 
+            // interando o array
             $_SESSION['carrinho'] = array_values($_SESSION['carrinho']);
         }
 

@@ -11,73 +11,88 @@
     <link href="<?= BASE_URL; ?>Assets/css/app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-     <!-- Bootstrap connection -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap connection -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
+
     <!-- Chart.JS -->
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- FAVICON -->
     <link rel="shortcut icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" />
-    <link rel="icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" type="image/x-icon"/>
-    <?php if(isset($viewData['CSS'])){echo $viewData['CSS'];}; ?>
+    <link rel="icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" type="image/x-icon" />
+    <?php if (isset($viewData['CSS'])) {
+        echo $viewData['CSS'];
+    }
+    ; ?>
     <style type="text/css">
-        
         .slideshow-container {
             max-width: 1000px;
             position: relative;
             margin: auto;
         }
-
     </style>
-    
+
 </head>
 
 <body>
     <div class="wrapper">
         <nav id="sidebar" class="sidebar">
             <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" href="#">
+                <a class="sidebar-brand text-decoration-none" href="#">
                     <span class="align-middle">Administrativo</span>
                 </a>
                 <ul class="sidebar-nav">
                     <!--  -->
-                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Dashboard")?'active':''; ?>">
-                        <a class="sidebar-link" href="<?=BASE_URL.'Home';?>">
-                            <i class="align-middle" data-feather="trending-up"></i> <span class="align-middle">DashBoard</span>
+                    <li
+                        class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Dashboard") ? 'active' : ''; ?>">
+                        <a class="sidebar-link" href="<?= BASE_URL . 'Home'; ?>">
+                            <i class="align-middle" data-feather="trending-up"></i> <span
+                                class="align-middle">DashBoard</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Vendas")?'active':''; ?>">
-                        <a class="sidebar-link" href="<?=BASE_URL.'Vendas';?>">
+                    <li
+                        class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Vendas") ? 'active' : ''; ?>">
+                        <a class="sidebar-link" href="<?= BASE_URL . 'Vendas'; ?>">
                             <i class="bi bi-calculator"></i> <span class="align-middle">Vendas</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Estoque")?'active':''; ?>">
-                        <a class="sidebar-link" href="<?=BASE_URL.'Produtos';?>">
+                    <li
+                        class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Estoque") ? 'active' : ''; ?>">
+                        <a class="sidebar-link" href="<?= BASE_URL . 'Produtos'; ?>">
                             <i class="bi bi-stack"></i> <span class="align-middle">Estoque</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Relatorios")?'active':''; ?>">
-                        <a class="sidebar-link" href="<?=BASE_URL.'Relatorios';?>">
+                    <li
+                        class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Relatorios") ? 'active' : ''; ?>">
+                        <a class="sidebar-link" href="<?= BASE_URL . 'Relatorios'; ?>">
                             <i class="bi bi-clipboard-data"></i> <span class="align-middle">Relatórios</span>
                         </a>
                     </li>
-                    
-                    <li class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Configurações")?'active':''; ?> ">
+
+                    <li
+                        class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Configurações") ? 'active' : ''; ?> ">
                         <!-- Perfil -->
                         <a href="#perfil" data-bs-toggle="collapse" class="sidebar-link collapsed">
-                            <i class="align-middle" data-feather="settings"></i> 
+                            <i class="align-middle" data-feather="settings"></i>
                             <span class="align-middle">Configurações</span>
                         </a>
-                        <ul id="perfil" class="sidebar-dropdown list-unstyled collapse <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Configurações")?'show':''; ?>" data-bs-parent="#sidebar">
-                            <li class="sidebar-item <?= (isset($viewData['nivel-2']) && $viewData['nivel-2'] == "Usuarios")?'active':''; ?>"><a class="sidebar-link" href="<?= BASE_URL.'Users';?>">Usuários</a></li>
-                            <li class="sidebar-item <?= (isset($viewData['nivel-2']) && $viewData['nivel-2'] == "Permissões")?'active':''; ?>"><a class="sidebar-link" href="<?= BASE_URL.'Permissions';?>">Grupos de permissões</a></li>
+                        <ul id="perfil"
+                            class="sidebar-dropdown list-unstyled collapse <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Configurações") ? 'show' : ''; ?>"
+                            data-bs-parent="#sidebar">
+                            <li
+                                class="sidebar-item <?= (isset($viewData['nivel-2']) && $viewData['nivel-2'] == "Usuarios") ? 'active' : ''; ?>">
+                                <a class="sidebar-link" href="<?= BASE_URL . 'Users'; ?>">Usuários</a></li>
+                            <li
+                                class="sidebar-item <?= (isset($viewData['nivel-2']) && $viewData['nivel-2'] == "Permissões") ? 'active' : ''; ?>">
+                                <a class="sidebar-link" href="<?= BASE_URL . 'Permissions'; ?>">Grupos de permissões</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -118,7 +133,8 @@
                                     <span class="indicator">4</span>
                                 </div>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
+                                aria-labelledby="alertsDropdown">
                                 <div class="dropdown-menu-header">
                                     4 New Notifications
                                 </div>
@@ -130,7 +146,8 @@
                                             </div>
                                             <div class="col-10">
                                                 <div class="text-dark">Update completed</div>
-                                                <div class="text-muted small mt-1">Restart server 12 to complete the update.</div>
+                                                <div class="text-muted small mt-1">Restart server 12 to complete the
+                                                    update.</div>
                                                 <div class="text-muted small mt-1">30m ago</div>
                                             </div>
                                         </div>
@@ -142,7 +159,8 @@
                                             </div>
                                             <div class="col-10">
                                                 <div class="text-dark">Lorem ipsum</div>
-                                                <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate hendrerit et.</div>
+                                                <div class="text-muted small mt-1">Aliquam ex eros, imperdiet vulputate
+                                                    hendrerit et.</div>
                                                 <div class="text-muted small mt-1">2h ago</div>
                                             </div>
                                         </div>
@@ -165,7 +183,8 @@
                                             </div>
                                             <div class="col-10">
                                                 <div class="text-dark">New connection</div>
-                                                <div class="text-muted small mt-1">Christina accepted your request.</div>
+                                                <div class="text-muted small mt-1">Christina accepted your request.
+                                                </div>
                                                 <div class="text-muted small mt-1">14h ago</div>
                                             </div>
                                         </div>
@@ -177,21 +196,27 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                            <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+                                data-bs-toggle="dropdown">
                                 <i class="align-middle" data-feather="settings"></i>
                             </a>
 
-                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                <span class="text-dark"><?= $viewData['name'];?></span>
+                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+                                data-bs-toggle="dropdown">
+                                <span class="text-dark"><?= $viewData['name']; ?></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" ><i class="align-middle me-1" data-feather="user"></i> Example</a>
-                                <a class="dropdown-item" ><i class="align-middle me-1" data-feather="pie-chart"></i> Example</a>
+                                <a class="dropdown-item"><i class="align-middle me-1" data-feather="user"></i>
+                                    Example</a>
+                                <a class="dropdown-item"><i class="align-middle me-1" data-feather="pie-chart"></i>
+                                    Example</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item"><i class="align-middle me-1" data-feather="settings"></i>Configurações</a>
-                                <a class="dropdown-item" ><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
+                                <a class="dropdown-item"><i class="align-middle me-1"
+                                        data-feather="settings"></i>Configurações</a>
+                                <a class="dropdown-item"><i class="align-middle me-1" data-feather="help-circle"></i>
+                                    Help Center</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="<?= BASE_URL.'Login/logout';?>">Sair</a>
+                                <a class="dropdown-item" href="<?= BASE_URL . 'Login/logout'; ?>">Sair</a>
                             </div>
                         </li>
                     </ul>
@@ -205,7 +230,8 @@
                     <div class="row text-muted">
                         <div class="col-6 text-start">
                             <p class="mb-0">
-                                <a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy; Murilo Morais 
+                                <a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy; Murilo
+                                Morais
                             </p>
                         </div>
                         <div class="col-6 text-end">
@@ -231,11 +257,21 @@
     </div>
     <script src="<?= BASE_URL; ?>Assets/js/jquery-3.5.1.js"></script>
     <script src="<?= BASE_URL; ?>Assets/js/jquery.mask.js"></script>
-    <script src="<?= BASE_URL; ?>Assets/js/app.js"></script>    
+    <script src="<?= BASE_URL; ?>Assets/js/app.js"></script>
     <script type="text/javascript">
-        const BASE_URL = '<?= BASE_URL;?>'
+        const BASE_URL = '<?= BASE_URL; ?>'
     </script>
-    <?php if(isset($viewData['JS'])){echo $viewData['JS'];}; ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <?php if (isset($viewData['JS'])) {
+        echo $viewData['JS'];
+    }
+    ; ?>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace()
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

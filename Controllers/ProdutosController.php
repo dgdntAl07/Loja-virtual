@@ -16,10 +16,6 @@ class ProdutosController extends Controller
 		}
 	}
 
-	/**
-	 * Summary of index - list products
-	 * @return void
-	 */
 	public function index()
 	{
 
@@ -31,10 +27,6 @@ class ProdutosController extends Controller
 		$this->loadTemplateAdmin("Admin/Produtos/index", $this->data);
 	}
 
-	/**
-	 * Summary of create - add product
-	 * @return void
-	 */
 	public function create()
 	{
 		$produtos = new Produtos();
@@ -65,10 +57,6 @@ class ProdutosController extends Controller
 				$upload = uploaded_file($file, $folder);
 			}
 
-			// echo "<pre>";
-			// var_dump($upload);
-			// exit;
-
 			$produtos->adicionarProdutos(
 				$nome_produto,
 				$descricao,
@@ -89,19 +77,6 @@ class ProdutosController extends Controller
 	public function editProduto()
 	{
 		$produtos = new Produtos();
-
-		/**
-		 * 
-		 * 01º receber os campos no controller
-		 * 02º alterar no banco de dados
-		 * 03º retornar para a view
-		 * 
-		 * pega o id como parametro principal
-		 * criar o array
-		 * Fazer um if pra cada e colocar em um array
-		 * passa o array e o id 
-		 * o array pega o que foi enviado para alterar
-		 */
 
 		if (isset($_POST['id_produto_edit']) && !empty($_POST['id_produto_edit'])) {
 
@@ -141,8 +116,5 @@ class ProdutosController extends Controller
 		} else {
 			echo "ID do produto não informado.";
 		}
-
-	}
-
-	
+	}	
 }

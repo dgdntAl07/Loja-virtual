@@ -19,7 +19,7 @@ class SiteController extends Controller
 
         $this->data['CSS'] = customCSS('style');
 
-        $this->loadTemplateSite('/Home/ExibirHome/index', $this->data);
+        $this->loadTemplateSite('/Home/Principal/index', $this->data);
 
     }
 }

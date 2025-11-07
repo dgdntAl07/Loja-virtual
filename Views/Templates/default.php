@@ -19,14 +19,14 @@
         echo $viewData['CSS'];
     }; ?>
 
-    <title>Home</title>
+    <title></title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger border-bottom shadow-sm mb-3">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom shadow-sm mb-3">
         <div class="container">
 
-            <a class="navbar-brand" href="<?= BASE_URL; ?>">Loja<strong>Virtual</strong></a>
+            <a class="navbar-brand" href="<?= BASE_URL; ?>">Bella<strong>Fragrance</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbar-collapse">
                 <span class="navbar-toggle-icon">
                     <i class="bi bi-list-nested"></i>
@@ -75,10 +75,10 @@
             </div>
         </div>
     </nav>
-
+<main>
     <!-- load content -->
     <?php $this->loadViewInTemplate($viewName, $viewData); ?>
-
+</main>
     <!-- load JavaScript -->
     <?php if (isset($viewData['JS'])) {
         echo $viewData['JS'];

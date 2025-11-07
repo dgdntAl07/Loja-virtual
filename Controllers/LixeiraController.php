@@ -2,9 +2,9 @@
 
 class LixeiraController extends Controller
 {
-
-
     private $data = array();
+    private $lixeira;
+    private $produtos;
 
     public function __construct()
     {
@@ -16,22 +16,24 @@ class LixeiraController extends Controller
             $user->setLoggedUser();
             $this->data["name"] = $user->getName();
         }
+        
+        $this->lixeira = new Lixeira();
     }
-
-
+    
+    
     public function index()
     {
 
-        $produtos = new Produtos();
+        
 
         $this->data['nivel-1'] = 'Lixeira';
-        $this->data['produtos_lixeira'] = $produtos->situacaoProduto();
+        $this->data['produtos_lixeira'] = $this->lixeira->situacaoProduto();
 
         $this->loadTemplateAdmin('Lixeira/index', $this->data);
 
         if (!empty($_GET['id'])) {
             $id = intval($_GET['id']);
-            $produtos->atualizarSituacaoProduto($id);
+            $this->lixeira->atualizarSituacaoProduto($id);
         }
 
         exit;
@@ -40,14 +42,14 @@ class LixeiraController extends Controller
 
     public function restaurarProduto()
     {
-        $produtos = new Produtos();
+        
 
         if (isset($_POST['id_produto_restaurar']) && !empty($_POST['id_produto_restaurar'])) {
             $id = intval($_POST['id_produto_restaurar']);
 
             // Atualiza a situação para 1
             $dados = ['situacao' => 1];
-            $produtos->atualizarSituacaoLixeira($id, $dados);
+            $this->lixeira->atualizarSituacaoLixeira($id, $dados);
 
             redirect('Lixeira');
             exit;
@@ -58,14 +60,13 @@ class LixeiraController extends Controller
 
     public function enviarLixeira()
     {
-        $produtos = new Produtos();
 
         if (isset($_POST['id_produto_excluir']) && !empty($_POST['id_produto_excluir'])) {
             $id = intval($_POST['id_produto_excluir']);
 
             // Atualiza a situação para 0
             $dados = ['situacao' => 0];
-            $produtos->atualizarProdutos($id, $dados);
+            $this->produtos->atualizarProdutos($id, $dados);
 
             redirect('Produtos');
             exit;
@@ -78,8 +79,7 @@ class LixeiraController extends Controller
     {
         if (isset($_POST['id_produto_excluir']) && !empty($_POST['id_produto_excluir'])) {
             $id = intval($_POST['id_produto_excluir']);
-            $produtos = new Produtos();
-            $produtos->deletarProduto($id);
+            $this->lixeira->deletarProduto($id);
         }
 
         redirect('Lixeira');
