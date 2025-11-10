@@ -3,10 +3,14 @@
 class CarrinhoController extends Controller
 {
     private $carrinho;
+    private $produtos;
+    private $vendas;
 
     public function __construct()
     {
         $this->carrinho = new Carrinho();
+        $this->produtos = new Produtos();
+        $this->vendas = new Vendas();
     }
 
     public function index()
@@ -121,6 +125,38 @@ class CarrinhoController extends Controller
 
     public function finalizarCompra()
     {
-        header("Location: " . BASE_URL . "Vendas");
+        if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
+            header("Location: " . BASE_URL . "Vendas");
+            exit;
+        }
+
+        $total = 0;
+
+        // total da compra
+        foreach ($_SESSION['carrinho'] as $item) {
+            $total += $item['preco'] * $item['quantidade'];
+        }
+
+        // venda realizada 
+        $id_venda = $this->vendas->registrarVenda($total);
+
+        // echo "<pre>";
+        // var_dump($_SESSION['carrinho']);
+        // exit;
+
+        foreach ($_SESSION['carrinho'] as $item) {
+            $this->vendas->registrarItem($id_venda, $item['id'], $item['quantidade'], $item['preco']);
+
+            // atualiza o estoque do produto
+            $novoEstoque = $item['quantidade'];
+            $this->produtos->atualizarProdutos($item['id'], [
+                'quantidade' => $this->carrinho->buscarPorId($item['id'])['quantidade'] - $novoEstoque
+            ]);
+        }
+
+        unset($_SESSION['carrinho']);
+
+        header("Location: " . BASE_URL . "Carrinho");
+        exit;
     }
 }

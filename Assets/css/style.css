@@ -56,3 +56,11 @@ a {
     color: #198754;
     font-weight: 600;
 }
+
+.active{
+    display: block;
+}
+
+section{
+    display: none;
+}

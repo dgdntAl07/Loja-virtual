@@ -1,36 +1,25 @@
 <main class="content">
-	<div class="container-fluid p-0">
+    <div class="container-fluid p-0">
 
-		<div class="row mb-2 mb-xl-3">
-			<div class="col-auto d-none d-sm-block">
-				<h3><strong>Vendas</strong></h3>
-			</div>
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong>Vendas</strong></h3>
+            </div>
 
-			<div class="col-auto ms-auto text-end mt-n1">
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
-						<li class="breadcrumb-item"><a href="#">Vendas</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Index</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
+            <div class="col-auto ms-auto text-end mt-n1">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
+                        <li class="breadcrumb-item"><a href="#">Vendas</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Index</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-header">
-                        <div class="row">
-                            <div class="col-md-6 text">
-                                <h6 class="card-subtitle m-3 text-muted">Histórico de Vendas do Mês</h6>
-                            </div>
-                            <div class="col-md-6 text-end">
-                                <a href="#" class="btn btn-secondary">algo</a>
-                                <a href="#" class="btn btn-secondary">algo</a>
-                            </div>
-                        </div>
-					</div>
-					<div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
                         <?php if (isset($Erro) && !empty($Erro)): ?>
                             <div class="row mb-3 d-flex justify-content-center">
                                 <div class="col-md-3">
@@ -59,32 +48,35 @@
                             </div>
                         <?php endif; ?>
 
-						<?php if(!isset($providerName)):?>
+                        <?php if (!isset($providerName)): ?>
 
-							<table id="datatables-responsive" class="table dataTable no-footer dtr-inline table-hover"
-                            style="width: 100%;" role="grid" aria-describedby="datatables-responsive_info">
-							<thead>
-								<th>ID</th>
-                                <th>Produto</th>
-                                <th>Quantidade</th>
-                                <th>Preço</th>
-								<th>Total</th>
-                                <th>Categoria</th>
-                                <th>Ações</th>
-							</thead>
-							<tbody>
+                            <table id="datatables-responsive" class="table dataTable no-footer dtr-inline table-hover"
+                                style="width: 100%;" role="grid" aria-describedby="datatables-responsive_info">
+                                <thead>
+                                    <th>ID</th>
+                                    <th>Produtos</th>
+                                    <th>Data</th>
+                                    <th>Total</th>
+                                </thead>
+                                <tbody>
+                                    <?php if (isset($produtos_vendidos)): ?>
+                                        <?php foreach ($produtos_vendidos as $produto): ?>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
 
-							</tbody>
-							</table>
+                        <?php else: ?>
+                            <p>Nenhum produto vendido</p>
+                        <?php endif; ?>
 
-						<?php else:?>
-							<p>Nenhum produto vendido</p>
-						<?php endif;?>
-							
-					</div>
-				</div>
-			</div>
-		</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	</div>
+    </div>
 </main>

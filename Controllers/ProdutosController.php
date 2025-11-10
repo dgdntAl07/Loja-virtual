@@ -43,7 +43,7 @@ class ProdutosController extends Controller
 			$preco        = $_POST['preco'];
 			$categoria    = $_POST['categoria'];
 
-			// Pega o último ID (para criar pasta enumerada)
+			// Pega o último ID
 			$ultimo = $produtos->getId();
 			$id = isset($ultimo['id']) ? $ultimo['id'] + 1 : 1;
 

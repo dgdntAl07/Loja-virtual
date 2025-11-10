@@ -12,6 +12,7 @@
 
     <div class="container">
         <div class="row">
+
             <div class="col-md-12 d-flex justify-content-between">
                 <h2> Aqui é o seu Carrinho</h2>
                 <form action="<?= BASE_URL; ?>Carrinho/limparcarrinho" method="POST">
@@ -112,12 +113,21 @@
                     <td></td>
                 </tr>
 
-
             </table>
 
             <form action="<?= BASE_URL; ?>Carrinho/finalizarCompra" method="POST">
-                <button type="submit" class="btn btn-success">Finalizar Compra</button>
+                <button onclick="compraFinalizada()" id="comprar" type="submit" class="btn btn-success">Finalizar
+                    Compra</button>
             </form>
+
+            <script>
+                const button = document.getElementById('comprar')
+                const section = document.querySelector('section')
+
+                button.addEventListener('click', () => {
+                    section.classList.add('active')
+                })
+            </script>
 
         <?php else: ?>
             <p>Seu carrinho esta vazio</p>

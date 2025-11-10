@@ -43,7 +43,7 @@ class Produtos extends Model
         $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '1'");
 
         if ($sql->rowCount() > 0) {
-            return $sql->fetchAll(PDO::FETCH_OBJ); // 👈 forçar objeto
+            return $sql->fetchAll(PDO::FETCH_OBJ); // forçar objeto
         } else {
             return [];
         }

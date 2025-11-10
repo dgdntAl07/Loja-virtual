@@ -39,7 +39,7 @@
 							const ctx = document.getElementById('grafico1');
 
 							new Chart(ctx, {
-								type: 'pie',
+								type: 'bar',
 								data: {
 									labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 									datasets: [{

@@ -4,7 +4,7 @@
     <div class="row g-4">
         <?php if (!empty($produtos_list)): ?>
             <?php foreach ($produtos_list as $produto): ?>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-md col-sm-3">
                     <div class="card shadow-sm border-0">
 
                         <?php if (!empty($produto->imagens)): ?>
