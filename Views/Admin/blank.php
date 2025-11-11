@@ -37,7 +37,6 @@
 						<!-- Gráfico de Vendas-->
 						<script>
 							const ctx = document.getElementById('grafico1');
-
 							new Chart(ctx, {
 								type: 'pie',
 								data: {

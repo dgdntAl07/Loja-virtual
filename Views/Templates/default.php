@@ -69,7 +69,7 @@
             <div class="align-self-end">
                 <ul class="navbar-nav gap-2">
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-white">Cadastro</a>
+                        <a href="<?= BASE_URL . "Cadastro"; ?> " class="nav-link text-white">Cadastro</a>
                     </li>
                     <li class="nav-item">
                         <a href="<?= BASE_URL . "Login"; ?>" class="nav-link text-white">Login</a>

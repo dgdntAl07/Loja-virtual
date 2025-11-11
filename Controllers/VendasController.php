@@ -50,15 +50,13 @@ class VendasController extends Controller {
 			// 	]
 			// ];
 			
-			$lista[$i]['itens'] = ;
+
+			// Ainda não é possivel buscar os itens -> Pesquisar qual o erro!!!
+			$lista[$i]['items'] = $vendas->pegarItens($venda['id']);
 			//$vendas[$i]['items'] = "SELECT * FROM vendas_itens WHERE id_venda = $venda['id_venda']";
 		}
 
-		echo '<pre>';
-		var_dump($vendas);
-		exit;
-
-		$this->data['produtos_vendidos'] = $vendas->pegarVendas();
+		$this->data['vendas'] = $lista;
 
         $this->loadTemplateAdmin('Admin/Vendas/index', $this->data);
     }

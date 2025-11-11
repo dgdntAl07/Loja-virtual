@@ -1,6 +1,5 @@
 <main class="content">
     <div class="container-fluid p-0">
-
         <div class="row mb-2 mb-xl-3">
             <div class="col-auto d-none d-sm-block">
                 <h3><strong>Vendas</strong></h3>
@@ -15,7 +14,6 @@
                 </nav>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -48,31 +46,93 @@
                             </div>
                         <?php endif; ?>
 
-                        <?php if (!isset($providerName)): ?>
-
+                        <?php if (!isset($venda['item'])): ?>
                             <table id="datatables-responsive" class="table dataTable no-footer dtr-inline table-hover"
                                 style="width: 100%;" role="grid" aria-describedby="datatables-responsive_info">
                                 <thead>
                                     <th>ID</th>
                                     <th>Produtos</th>
                                     <th>Data</th>
+                                    <th>Cliente</th>
                                     <th>Total</th>
                                 </thead>
                                 <tbody>
-                                    <?php if (isset($produtos_vendidos)): ?>
-                                        <?php foreach ($produtos_vendidos as $produto): ?>
+                                    <?php if (isset($vendas)): ?>
+                                        <?php foreach ($vendas as $venda): ?>
                                             <tr>
-                                                <td></td>
+                                                <td><?= $venda['id']; ?></td>
+                                                <td>
+                                                    <button type="submit" class="btn btn-outline-success" data-bs-toggle="modal"
+                                                        data-bs-target="#produtoVendido<?= $venda['id']; ?>">
+                                                        Ver produtos
+                                                    </button>
+
+                                                    <!-- Modal dos produtos vendidos -->
+                                                    <div class="modal fade" id="produtoVendido<?= $venda['id']; ?>"
+                                                        aria-hidden="true" tabindex="-1">
+                                                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    Produtos Comprados
+                                                                    <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <?php if (!empty($venda['items'])): ?>
+                                                                                <table class="table">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>ID</th>
+                                                                                            <th>Produto</th>
+                                                                                            <th>Quantidade</th>
+                                                                                            <th>Preço</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <?php foreach ($venda['items'] as $item): ?>
+                                                                                            <tr>
+                                                                                                <td><?= $item['id']; ?>
+                                                                                                </td>
+                                                                                                <td><?= $item['id_produto']?></td>
+                                                                                                <td><?= $item['quantidade']?></td>
+                                                                                                <td><?= "R$ " . number_format($item['preco'], 2,",", ".")?></td>
+                                                                                            </tr>
+                                                                                        <?php endforeach ?>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            <?php else: ?>
+                                                                                <div class="alert alert-danger" role="alert">
+                                                                                    A simple danger alert—check it out!
+                                                                                </div>
+                                                                            <?php endif; ?>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Fim do Modal dos produtos vendidos -->
+
+                                                </td>
+                                                <td><?= $venda['data_venda']; ?></td>
+                                                <td>
+                                                    <button type="submit" class="btn btn-outline-primary">
+                                                        Ver comprador
+                                                    </button>
+                                                </td>
+                                                <td><?= "R$ " . number_format($venda['total'], 2, ",", "."); ?></td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </tbody>
                             </table>
-
                         <?php else: ?>
                             <p>Nenhum produto vendido</p>
                         <?php endif; ?>
-
                     </div>
                 </div>
             </div>
