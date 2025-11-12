@@ -186,7 +186,7 @@
                                                 <?= $produto->quantidade > 0 ? "Disponivel" : "Indisponivel"; ?>
                                             </td>
                                             <td><?= "R$" . number_format($produto->preco, 2, ',', '.'); ?></td>
-                                            <td><?= $produto->categoria; ?></td>
+                                            <td><?= $produto->id_ctg; ?></td>
                                             <td class="table-action">
                                                 <a data-bs-toggle="modal" data-bs-target="#editproduto<?= $produto->id; ?>">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

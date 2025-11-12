@@ -13,19 +13,19 @@ class Produtos extends Model
     ###  Estoque  ###
 
     // Adicionar produtos 
-    public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $categoria, $upload)
+    public function adicionarProdutos($nome_produto, $descricao, $quantidade, $preco, $id_ctg, $upload)
     {
         try {
             $sql = $this->db->prepare("
-            INSERT INTO produtos (nome_produto, descricao, quantidade, preco, categoria, imagens)
-            VALUES (:nome, :descricao, :quantidade, :preco, :categoria, :upload)
+            INSERT INTO produtos (nome_produto, descricao, quantidade, preco, id_ctg, imagens)
+            VALUES (:nome, :descricao, :quantidade, :preco, :id_ctg, :upload)
         ");
 
             $sql->bindValue(":nome", $nome_produto);
             $sql->bindValue(":descricao", $descricao);
             $sql->bindValue(":quantidade", $quantidade);
             $sql->bindValue(":preco", $preco);
-            $sql->bindValue(":categoria", $categoria);
+            $sql->bindValue(":id_ctg", $id_ctg);
             $sql->bindValue(":upload", $upload);
 
             $ret = $sql->execute();

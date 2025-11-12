@@ -28,9 +28,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom shadow-sm mb-3 ">
         <div class="container">
             <div class="row">
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                     <img src="<?= BASE_URL; ?>Images/favicon_BellaFragrance.png" alt="Logo do site" class="img-fluid img-thumbnail">
-                </div>
+                </div> -->
                 <div class="col-sm-2">
                     <a class="navbar-brand" href="<?= BASE_URL; ?>">Bella<strong>Fragrance</strong></a>
                 </div>

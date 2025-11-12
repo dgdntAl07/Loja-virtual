@@ -50,8 +50,6 @@ class VendasController extends Controller {
 			// 	]
 			// ];
 			
-
-			// Ainda não é possivel buscar os itens -> Pesquisar qual o erro!!!
 			$lista[$i]['items'] = $vendas->pegarItens($venda['id']);
 			//$vendas[$i]['items'] = "SELECT * FROM vendas_itens WHERE id_venda = $venda['id_venda']";
 		}

@@ -38,10 +38,10 @@ class ProdutosController extends Controller
 			isset($_POST['preco']) && !empty($_POST['preco'])
 		) {
 			$nome_produto = addslashes(trim($_POST['nome_produto']));
-			$quantidade   = intval($_POST['quantidade']);
-			$descricao    = addslashes(trim($_POST['descricao']));
-			$preco        = $_POST['preco'];
-			$categoria    = $_POST['categoria'];
+			$quantidade = intval($_POST['quantidade']);
+			$descricao = addslashes(trim($_POST['descricao']));
+			$preco = $_POST['preco'];
+			$id_ctg = $_POST['categoria'];
 
 			// Pega o último ID
 			$ultimo = $produtos->getId();
@@ -62,7 +62,7 @@ class ProdutosController extends Controller
 				$descricao,
 				$quantidade,
 				$preco,
-				$categoria,
+				$id_ctg,
 				$upload
 			);
 
@@ -116,5 +116,5 @@ class ProdutosController extends Controller
 		} else {
 			echo "ID do produto não informado.";
 		}
-	}	
+	}
 }
