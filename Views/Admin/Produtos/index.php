@@ -34,7 +34,7 @@
 
                             <!-- Modal de Adicionar Produto-->
                             <div class="modal fade" id="addproduto" aria-hidden="true" tabindex="-1">
-                                <div class="modal-dialog modal-md modal-dialog-centered">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             Adicionar Produtos
@@ -76,12 +76,11 @@
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <label class="form-label">Categoria</label>
-                                                                </div>
-                                                                <div class="col-md-6">
                                                                     <button class="btn-sm btn-primary badge">
-                                                                        add
+                                                                        <i class="bi bi-plus-lg"></i>
                                                                     </button>
                                                                 </div>
+                                                                
                                                             </div>
                                                             <select id="categoria" class="form-select" name="categoria"
                                                                 required>
@@ -168,7 +167,6 @@
                                 <th>Produto</th>
                                 <th>Quantidade</th>
                                 <th>Descrição</th>
-                                <th>Status</th>
                                 <th>Preço</th>
                                 <th>Categoria</th>
                                 <th>Ações</th>
@@ -182,9 +180,6 @@
                                             <td><?= $produto->nome_produto; ?></td>
                                             <td><?= $produto->quantidade; ?></td>
                                             <td><?= $produto->descricao; ?></td>
-                                            <td class="<?= $produto->quantidade > 0 ? 'table-success' : 'table-danger'; ?>">
-                                                <?= $produto->quantidade > 0 ? "Disponivel" : "Indisponivel"; ?>
-                                            </td>
                                             <td><?= "R$" . number_format($produto->preco, 2, ',', '.'); ?></td>
                                             <td><?= $produto->id_ctg; ?></td>
                                             <td class="table-action">

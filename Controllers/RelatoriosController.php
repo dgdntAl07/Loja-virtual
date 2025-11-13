@@ -1,18 +1,20 @@
 <?php
-class RelatoriosController extends Controller {
-    
+class RelatoriosController extends Controller
+{
+
     private $data;
     private $relatorios;
 
-    public function __construct(){
+    public function __construct()
+    {
         $user = new Users();
-		if (!$user->isLogged()) {
-			header('Location: ' . BASE_URL . 'Login');
-			exit;
-		} else {
-			$user->setLoggedUser();
-			$this->data["name"] = $user->getName();
-		}
+        if (!$user->isLogged()) {
+            header('Location: ' . BASE_URL . 'Login');
+            exit;
+        } else {
+            $user->setLoggedUser();
+            $this->data["name"] = $user->getName();
+        }
 
         $this->relatorios = new Relatorios();
     }
@@ -20,15 +22,18 @@ class RelatoriosController extends Controller {
     public function index()
     {
         $this->data['nivel-1'] = 'Relatorios';
+        $this->data['products'] = $this->graficoProdutosVendidos();
+
+        // echo "<pre>";
+        // print_r($this->data['products']);
+        // exit;
+
         $this->loadTemplateAdmin("Admin/Relatorios/index", $this->data);
     }
 
-    public function graficoProdutos(){
+    public function graficoProdutosVendidos()
+    {
+        return $this->relatorios->nomeProdutos();
 
-        $listaProdutos = $this->relatorios->pegarItens();
-        
-        foreach ($listaProdutos as $i => $produto){
-            $listaProdutos[$i]['produtos'] = $produto->relatorios->
-        }
     }
 }

@@ -104,6 +104,19 @@ class Produtos extends Model
         }
     }
 
+    public function verificarCtg(){
+        $sql = $this->db->query("SELECT cp.nome_categoria FROM produtos AS p INNER JOIN categorias_produtos AS cp ON p.id_ctg = cp.id_categoria;");
+        $sql->execute();
+
+
+        if ($sql->rowCount() > 0) {
+            // Retorna como array associativo
+            return $sql->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return ['id' => 0];
+        }
+    }
+
 }
 
 

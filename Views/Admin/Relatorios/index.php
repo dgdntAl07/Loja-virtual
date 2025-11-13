@@ -3,7 +3,7 @@
 
 		<div class="row mb-2 mb-xl-3">
 			<div class="col-auto d-none d-sm-block">
-				<h3><strong>Dashboards</strong></h3>
+				<h3><strong>Relatórios</strong></h3>
 			</div>
 
 			<div class="col-auto ms-auto text-end mt-n1">
@@ -17,34 +17,41 @@
 		</div>
 
 		<div class="row">
-			<div class="col-12">
+			<div class="col-6">
 				<div class="card">
-					<div class="card-header">
-						<h5 class="card-title mb-0">Empty card</h5>
-					</div>
 					<div class="card-body">
 						<div class="row d-flex justify-content-evenly">
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<h6 class="text-center">Produtos Mais Vendidos</h6>
 								<canvas id="grafico1"></canvas>
-							</div>
-							<div class="col-md-4">
-								<h6 class="text-center">Vendas do Ano</h6>
-								<canvas id="grafico2"></canvas>
 							</div>
 						</div>
 
 						<!-- Gráfico de Vendas-->
 						<script>
 							const ctx = document.getElementById('grafico1');
+							const produtos = <?= json_encode($products); ?>;
+							
+							let labelNames = [];
+							for(let i = 0; i < produtos.length; i++){
+								labelNames.push(produtos[i].nome_produto);
+							};
+
+							let labelQnt = [];
+							for(let i = 0; i < produtos.length; i++){
+								labelQnt.push(produtos[i].qtd);
+							}
+
+							console.log(labelNames);
+							console.log(labelQnt);
 
 							new Chart(ctx, {
 								type: 'bar',
 								data: {
-									labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+									labels: labelNames,
 									datasets: [{
-										label: '# of Votes',
-										data: [12, 16, 3, 5, 2, 3],
+										label: 'Quantidades vendidas',
+										data: labelQnt,
 										borderWidth: 1
 									}]
 								},
@@ -57,31 +64,43 @@
 								}
 							});
 						</script>
+					</div>
+				</div>
+			</div>
 
-						<!-- Gráfico de Produtos Mais Vendidos -->
-						<script>
-							const ctx2 = document.getElementById('grafico2');
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="row d-flex justify-content-evenly">
+							<div class="col-md-6">
+								<h6 class="text-center">Categorias de Maior Interesse</h6>
+								<canvas id="grafico2"></canvas>
+							</div>
 
-							new Chart(ctx2, {
-								type: 'pie',
-								data: {
-									labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-									datasets: [{
-										label: '# of Votes',
-										data: [12, 16, 3, 5, 2, 3],
-										borderWidth: 1
-									}]
-								},
-								options: {
-									scales: {
-										y: {
-											beginAtZero: true
+							<!-- Gráfico de Produtos Mais Vendidos -->
+							<script>
+								const ctx2 = document.getElementById('grafico2');
+
+								new Chart(ctx2, {
+									type: 'pie',
+									data: {
+										labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+										datasets: [{
+											label: '#',
+											data: [12, 16, 3, 5, 2, 3],
+											borderWidth: 1
+										}]
+									},
+									options: {
+										scales: {
+											y: {
+												beginAtZero: true
+											}
 										}
 									}
-								}
-							});
-						</script>
-
+								});
+							</script>
+						</div> 
 					</div>
 				</div>
 			</div>

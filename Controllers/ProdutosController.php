@@ -57,6 +57,9 @@ class ProdutosController extends Controller
 				$upload = uploaded_file($file, $folder);
 			}
 
+			
+
+
 			$produtos->adicionarProdutos(
 				$nome_produto,
 				$descricao,
