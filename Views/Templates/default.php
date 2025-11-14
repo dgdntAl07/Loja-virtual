@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= BASE_URL; ?>Assets/css/style.css">
+
+    <!-- Sem funcionar, olhar depois dos ajustes!!! -->
+    <!-- <link rel="stylesheet" href="<?= BASE_URL; ?>Assets/css/style.css"> -->
 
     <!-- Bootstrap connection -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -20,17 +22,35 @@
     }
     ; ?>
 
+    <!-- Estilização -->
+    <style>
+        :root {
+            --brand-color-bege: #e8c39e;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        nav {
+            background-color: var(--brand-color-bege);
+        }
+    </style>
+
     <link rel="shortcut icon" href="<?= BASE_URL; ?>Images/favicon_BellaFragrance.png" type="image/x-icon">
     <title>Bella Fragrance</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom shadow-sm mb-3 ">
+    <nav class="navbar navbar-expand-lg border-bottom shadow-sm mb-3 "> <!--navbar-dark bg-dark -->
         <div class="container">
             <div class="row">
-                <!-- <div class="col-sm-2">
-                    <img src="<?= BASE_URL; ?>Images/favicon_BellaFragrance.png" alt="Logo do site" class="img-fluid img-thumbnail">
-                </div> -->
                 <div class="col-sm-2">
                     <a class="navbar-brand" href="<?= BASE_URL; ?>">Bella<strong>Fragrance</strong></a>
                 </div>
@@ -45,37 +65,44 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav flex-grow-1 gap-3">
+
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-white">Principal</a>
+                        <a href="<?= BASE_URL; ?>" class="nav-link">Início</a>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-expanded="false">Categorias</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Limpeza</a></li>
-                            <li><a class="dropdown-item" href="#">Perfumes</a></li>
-                            <li><a class="dropdown-item" href="#">Cósmeticos</a></li>
-                            <li><a class="dropdown-item" href="#">Brindes</a></li>
+                            <li><a class="dropdown-item" href="<?= BASE_URL . '?id_ctg=1' ?>">Limpeza</a></li>
+                            <li><a class="dropdown-item" href="<?= BASE_URL . '?id_ctg=2' ?>">Perfumes</a></li>
+                            <li><a class="dropdown-item" href="<?= BASE_URL . '?id_ctg=3' ?>">Cósmeticos</a></li>
+                            <li><a class="dropdown-item" href="<?= BASE_URL . '?id_ctg=4' ?>">Brindes</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link text-white">Política de Privacidade</a>
-                    </li>
-                </ul>
 
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Contatos</a>
+                    </li>
+
+                </ul>
             </div>
+
+
 
             <div class="align-self-end">
                 <ul class="navbar-nav gap-2">
+
                     <li class="nav-item">
-                        <a href="<?= BASE_URL . "Cadastro"; ?> " class="nav-link text-white">Cadastro</a>
+                        <a href="<?= BASE_URL . "Cadastro"; ?> " class="nav-link">Cadastro</a>
                     </li>
+
                     <li class="nav-item">
-                        <a href="<?= BASE_URL . "Login"; ?>" class="nav-link text-white">Login</a>
+                        <a href="<?= BASE_URL . "Login"; ?>" class="nav-link">Login</a>
                     </li>
+
                     <li class="nav-item">
-                        <a href="<?= BASE_URL . "Carrinho"; ?>" class="nav-link text-white">
+                        <a href="<?= BASE_URL . "Carrinho"; ?>" class="nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-cart3" viewBox="0 0 16 16">
                                 <path
@@ -83,12 +110,13 @@
                             </svg>
                         </a>
                     </li>
+
                 </ul>
 
             </div>
         </div>
     </nav>
-    <main>
+    <main class="align-content-lg-start">
         <!-- load content -->
         <?php $this->loadViewInTemplate($viewName, $viewData); ?>
     </main>
@@ -98,7 +126,7 @@
     }
     ; ?>
 
-    <footer class="border-top text-muted align-content-lg-end bg-light">
+    <footer class="border-top text-muted bg-light">
         <div class="container">
             <div class="row py-3">
                 <div class="col-12 col-md-4 text-center text-md-left">

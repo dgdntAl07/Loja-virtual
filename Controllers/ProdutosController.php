@@ -57,9 +57,6 @@ class ProdutosController extends Controller
 				$upload = uploaded_file($file, $folder);
 			}
 
-			
-
-
 			$produtos->adicionarProdutos(
 				$nome_produto,
 				$descricao,
@@ -101,12 +98,20 @@ class ProdutosController extends Controller
 			}
 
 			if (!empty($_POST['categoria_edit'] ?? '')) {
-				$dados['categoria'] = $_POST['categoria_edit'];
+				$dados['id_ctg'] = $_POST['categoria_edit'];
 			}
 
 			if (!empty($_POST['preco_edit'] ?? '')) {
 				$dados['preco'] = floatval($_POST['preco_edit']);
 			}
+
+			$imagemAntiga = $produtos->selectForm();
+			$imagemAtual = $_FILES['imagem'];
+
+			$folder = 'Assets/Uploads/Produtos/' . $id . '/';
+			$upload = '';
+
+			
 
 			if (empty($dados)) {
 				echo "Nenhum campo foi alterado.";
@@ -120,4 +125,6 @@ class ProdutosController extends Controller
 			echo "ID do produto não informado.";
 		}
 	}
+
+	
 }

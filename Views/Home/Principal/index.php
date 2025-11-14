@@ -4,8 +4,8 @@
     <div class="row g-4">
         <?php if (!empty($produtos_list)): ?>
             <?php foreach ($produtos_list as $produto): ?>
-                <div class="col-md col-sm-3">
-                    <div class="card shadow-sm border-0">
+                <div class="col-sm-3">
+                    <div class="card shadow-sm border-0" style="width: 18rem;">
 
                         <?php if (!empty($produto->imagens)): ?>
                             <img src="<?= BASE_URL . $produto->imagens; ?>" class="card-img-top"
@@ -23,16 +23,12 @@
                             </p>
 
                             <ul class="list-unstyled mb-3">
-                                <li><strong>Categoria:</strong> <?= htmlspecialchars($produto->categoria); ?></li>
+                                <li><strong>Categoria:</strong> <?= htmlspecialchars($produto->id_ctg); ?></li>
                                 <li><strong>Quantidade:</strong> <?= $produto->quantidade; ?></li>
                                 <li><strong>Preço:</strong> R$ <?= number_format($produto->preco, 2, ',', '.'); ?></li>
-                                <li>
-                                    <strong>Situação:</strong>
-                                    <span class="<?= $produto->situacao == 1 ? 'status-disponivel' : 'status-indisponivel'; ?>">
-                                        <?= $produto->situacao == 1 ? 'Disponível' : 'Indisponível'; ?>
-                                    </span>
-                                </li>
                             </ul>
+
+                            
 
                             <form action="<?= BASE_URL; ?>Carrinho/adicionar" method="POST">
                                 <input type="hidden" name="produto_id" value="<?= $produto->id; ?>">

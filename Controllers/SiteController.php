@@ -14,8 +14,13 @@ class SiteController extends Controller
     {
 
         $produtos = new Produtos();
+        $cat_id = $_GET['id_ctg'] ?? null;
 
-        $this->data['produtos_list'] = $produtos->getAll();
+        if($cat_id != null) {
+            $this->data['produtos_list'] = $produtos->getByCatId($cat_id);
+        } else {
+            $this->data['produtos_list'] = $produtos->getAll();
+        };
 
         $this->data['CSS'] = customCSS('style');
 
