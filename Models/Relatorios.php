@@ -17,7 +17,7 @@ class Relatorios extends Model
     }
 
     public function nomeProdutos(){
-        $sql = $this->db->query("SELECT COUNT(p.nome_produto) + vdi.quantidade - 1 as qtd, p.nome_produto FROM produtos AS p INNER JOIN vendas_itens AS vdi ON vdi.id_produto = p.id GROUP BY(p.nome_produto)");
+        $sql = $this->db->query("SELECT SUM(vdi.quantidade) as qtd, p.nome_produto FROM produtos AS p INNER JOIN vendas_itens AS vdi ON vdi.id_produto = p.id GROUP BY(p.nome_produto)");
         // $sql = $this->db->query("SELECT * FROM produtos");
         $sql->execute();
 
@@ -27,15 +27,5 @@ class Relatorios extends Model
             return [];
         }
     }
-
-    // public function pegarProdutos(){
-    //     $sql = $this->db->prepare("SELECT FROM  WHERE ");
-    //     $sql->bindValue("", );
-    //     $sql->execute();
-
-    //     if($sql->rowCount() > 0){
-    //         return $sql->fetchAll(PDO::FETCH_ASSOC);
-    //     } 
-    // }
 
 }

@@ -40,7 +40,7 @@ class Produtos extends Model
     // Ler produtos
     public function getAll()
     {
-        $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '1'");
+        $sql = $this->db->query("SELECT p.*,cp.nome_categoria FROM produtos AS p INNER JOIN categorias_produtos AS cp ON id_ctg = id_categoria WHERE p.situacao = '1'");
 
         if ($sql->rowCount() > 0) {
             return $sql->fetchAll(PDO::FETCH_OBJ); // forçar objeto
@@ -106,30 +106,19 @@ class Produtos extends Model
 
     public function getByCatId($id_ctg)
     {
-       $sql = $this->db->prepare("SELECT * FROM produtos WHERE id_ctg = :id_ctg");
-       $sql->bindValue(":id_ctg", $id_ctg);
-       $sql->execute();
+        $sql = $this->db->prepare("SELECT * FROM produtos WHERE id_ctg = :id_ctg");
+        $sql->bindValue(":id_ctg", $id_ctg);
+        $sql->execute();
 
         if ($sql->rowCount() > 0) {
-            return $sql->fetchAll(PDO::FETCH_OBJ); 
+            return $sql->fetchAll(PDO::FETCH_OBJ);
         } else {
             return [];
         }
     }
 
-    public function pegarNomeCategoria(){
-        $sql = $this->db->query("SELECT cp.nome_categoria FROM produtos AS p INNER JOIN categorias_produtos AS cp ON p.id_ctg = cp.id_categoria;");
-        $sql->execute();
-
-        if ($sql->rowCount() > 0) {
-            // Retorna como array associativo
-            return $sql->fetch(PDO::FETCH_ASSOC);
-        } else {
-            return ['id' => 0];
-        }
-    }
-
-    public function selectForm(){
+    public function selectForm()
+    {
         $sql = $this->db->query("SELECT imagens FROM produtos");
         $sql->execute();
 
@@ -140,6 +129,7 @@ class Produtos extends Model
             return ['id' => 0];
         }
     }
+
 
 }
 

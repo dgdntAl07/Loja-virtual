@@ -4,6 +4,7 @@ class RelatoriosController extends Controller
 
     private $data;
     private $relatorios;
+    private $categorias;
 
     public function __construct()
     {
@@ -17,6 +18,7 @@ class RelatoriosController extends Controller
         }
 
         $this->relatorios = new Relatorios();
+    
     }
 
     public function index()

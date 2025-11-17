@@ -4,10 +4,11 @@ class SiteController extends Controller
 {
 
     private $data = array();
+    private $categorias;
 
     public function __construct()
     {
-
+        $this->categorias = new Categorias();
     }
 
     public function index()
@@ -22,7 +23,16 @@ class SiteController extends Controller
             $this->data['produtos_list'] = $produtos->getAll();
         };
 
+        $this->data['categ'] = $this->categorias->pegarNomeCat();
+
+        // var_dump($this->data['categ']);
+        // exit;
+
         $this->data['CSS'] = customCSS('style');
+
+        // echo "<pre>";
+        // print_r($this->data['categ']);
+        // exit;
 
         $this->loadTemplateSite('/Home/Principal/index', $this->data);
 

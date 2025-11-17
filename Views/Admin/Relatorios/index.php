@@ -82,7 +82,45 @@
 								const ctx2 = document.getElementById('grafico2');
 
 								new Chart(ctx2, {
-									type: 'pie',
+									type: 'polarArea',
+									data: {
+										labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+										datasets: [{
+											label: '#',
+											data: [12, 16, 3, 5, 2, 3],
+											borderWidth: 1
+										}]
+									},
+									options: {
+										scales: {
+											y: {
+												beginAtZero: true
+											}
+										}
+									}
+								});
+							</script>
+
+						</div> 
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="row d-flex justify-content-evenly">
+							<div class="col-md-6">
+								<h6 class="text-center">Vendas</h6>
+								<canvas id="grafico3"></canvas>
+							</div>
+
+							<!-- Gráfico de Produtos Mais Vendidos -->
+							<script>
+								const ctx3 = document.getElementById('grafico3');
+
+								new Chart(ctx3, {
+									type: 'bar',
 									data: {
 										labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 										datasets: [{

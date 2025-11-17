@@ -74,10 +74,18 @@
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-expanded="false">Categorias</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="<?= BASE_URL . '?id_ctg=1' ?>">Limpeza</a></li>
-                            <li><a class="dropdown-item" href="<?= BASE_URL . '?id_ctg=2' ?>">Perfumes</a></li>
-                            <li><a class="dropdown-item" href="<?= BASE_URL . '?id_ctg=3' ?>">Cósmeticos</a></li>
-                            <li><a class="dropdown-item" href="<?= BASE_URL . '?id_ctg=4' ?>">Brindes</a></li>
+                            <li>
+                                <a class="dropdown-item">Selecione uma categoria</a>
+                            </li>
+                            <?php foreach ($viewData['categ'] as $cat): ?>
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="<?= BASE_URL . '?id_ctg=' . $cat['id_categoria'] ?>"><?= $cat['nome_categoria'] ?></a>
+                                </li>
+                            <?php endforeach; ?>
+
+
+
                         </ul>
                     </li>
 
@@ -87,8 +95,6 @@
 
                 </ul>
             </div>
-
-
 
             <div class="align-self-end">
                 <ul class="navbar-nav gap-2">

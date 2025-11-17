@@ -24,6 +24,10 @@ class ProdutosController extends Controller
 		$this->data['nivel-1'] = 'Estoque';
 		$this->data['produtos_list'] = $produtos->getAll();
 
+		// echo "<pre>";
+        // print_r($this->data['nomeCateg']);
+        // exit;
+
 		$this->loadTemplateAdmin("Admin/Produtos/index", $this->data);
 	}
 

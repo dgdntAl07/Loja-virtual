@@ -181,7 +181,7 @@
                                             <td><?= $produto->quantidade; ?></td>
                                             <td><?= $produto->descricao; ?></td>
                                             <td><?= "R$" . number_format($produto->preco, 2, ',', '.'); ?></td>
-                                            <td><?= $produto->id_ctg; ?></td>
+                                            <td><?= $produto->nome_categoria ;?></td>
                                             <td class="table-action">
                                                 <a data-bs-toggle="modal" data-bs-target="#editproduto<?= $produto->id; ?>">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -205,7 +205,7 @@
                                         <!-- Modal de Editar Produto -->
                                         <div class="modal fade" id="editproduto<?= $produto->id; ?>" tabindex="-1" role="dialog"
                                             aria-hidden="true">
-                                            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         Editar produto

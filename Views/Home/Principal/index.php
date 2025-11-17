@@ -1,4 +1,5 @@
 <div class="container py-4">
+
     <h2 class="mb-4 text-center">Lista de Produtos</h2>
 
     <div class="row g-4">
@@ -28,7 +29,7 @@
                                 <li><strong>Preço:</strong> R$ <?= number_format($produto->preco, 2, ',', '.'); ?></li>
                             </ul>
 
-                            
+
 
                             <form action="<?= BASE_URL; ?>Carrinho/adicionar" method="POST">
                                 <input type="hidden" name="produto_id" value="<?= $produto->id; ?>">
