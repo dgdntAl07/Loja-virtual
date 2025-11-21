@@ -134,5 +134,4 @@ class ProdutosController extends Controller
 		}
 	}
 
-	
 }

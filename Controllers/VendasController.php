@@ -20,17 +20,7 @@ class VendasController extends Controller {
 
         $this->data['nivel-1'] = 'Vendas';
 
-		// $vendas = [
-		// 	[
-		// 		'id' => 1,
-		// 		'data' => date('d/m/Y H:i'),
-		// 		'value' => 100.00
-		// 	]
-		// ];
-
 		$lista = $vendas->pegarVendas();
-
-		//$vendas = 'SELECT * FROM vendas';
 
 		foreach ($lista as $i => $venda) {
 			// $vendas[$i]['items'] = [
@@ -51,11 +41,20 @@ class VendasController extends Controller {
 			// ];
 			
 			$lista[$i]['items'] = $vendas->pegarItens($venda['id']);
-			//$vendas[$i]['items'] = "SELECT * FROM vendas_itens WHERE id_venda = $venda['id_venda']";
 		}
 
 		$this->data['vendas'] = $lista;
-
         $this->loadTemplateAdmin('Admin/Vendas/index', $this->data);
     }
+
+	public function excluirVenda(){
+
+		$vendas = new Vendas();
+
+		 if (isset($_POST['id_produto_venda']) && !empty($_POST['id_produto_venda'])) {
+            $id = intval($_POST['id_produto_venda']);
+            $vendas->deletarVenda($id);
+        }
+        redirect('Vendas');
+	}
 }

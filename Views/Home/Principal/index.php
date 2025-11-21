@@ -41,11 +41,6 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-        <!-- <div class="col-md-6 px-0">
-            <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-            <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
-            <p class="lead mb-0"><a href="#" class="text-dark fw-bold">Continue reading...</a></p>
-        </div> -->
     </div>
 
 
@@ -73,8 +68,8 @@
                             </p>
 
                             <ul class="list-unstyled mb-3">
-                                <li><strong>Categoria:</strong> <?= htmlspecialchars($produto->id_ctg); ?></li>
-                                <li><strong>Quantidade:</strong> <?= $produto->quantidade; ?></li>
+                                <li><strong>Categoria:</strong> <?= htmlspecialchars($produto->nome_categoria); ?></li>
+                                <li><strong>Quantidade:</strong> <?= htmlspecialchars($produto->quantidade); ?></li>
                                 <li><strong>Preço:</strong> R$ <?= number_format($produto->preco, 2, ',', '.'); ?></li>
                             </ul>
 

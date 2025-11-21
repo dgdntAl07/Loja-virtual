@@ -17,11 +17,108 @@
 		</div>
 
 		<div class="row">
-			<div class="col-12">
+
+			<div class="col-sm-4">
+				<div class="card">
+					<div class="card-body">
+						<h5>Total de Vendas do Mês</h5>
+						<h3 class="card-text">
+							R$ <?= $sumTotalVendas['total']; ?>
+						</h3>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Saldo Bancário
+							<span class="badge bg-secondary">4</span>
+						</h5>
+						<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
+								aria-valuemin="0" aria-valuemax="100">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Produtos a serem repostos
+							<span class="badge bg-secondary">4</span>
+						</h5>
+						<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25"
+								aria-valuemin="0" aria-valuemax="100">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="row">
+			<div class="col-4">
+				<div class="card">
+					<div class="card-body">
+						<div class="row d-flex gap-1">
+							<div class="col-md-12">
+								<h6 class="text-center">Estoque</h6>
+								<canvas id="grafico3"></canvas>
+							</div>
+
+
+
+							<!-- Gráfico de Estoque-->
+							<script>
+								const ctx3 = document.getElementById('grafico3');
+
+								const Estoque = <?= json_encode($countEstoque); ?>;
+
+								let nomeProduto = [];
+								let qtdEstoque = [];
+
+								for (let i = 0; i < Estoque.length; i++) {
+									nomeProduto.push(Estoque[i].produto);
+									qtdEstoque.push(Estoque[i].total_itens);
+								}
+
+								new Chart(ctx3, {
+									type: 'pie',
+									data: {
+										labels: nomeProduto,
+										datasets: [{
+											label: '#',
+											data: qtdEstoque,
+											borderWidth: 1
+										}]
+									},
+									options: {
+										scales: {
+											y: {
+												beginAtZero: true
+											}
+										}
+									}
+								});
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-8">
 				<div class="card">
 					<div class="card-body">
 						<div class="row d-flex">
-							<div class="col-md-6">
+							<div class="col-md-11">
 								<h6 class="text-center">Produtos Mais Vendidos</h6>
 								<canvas id="grafico1"></canvas>
 							</div>
@@ -42,15 +139,12 @@
 								labelQnt.push(produtos[i].qtd);
 							}
 
-							console.log(labelNames);
-							console.log(labelQnt);
-
 							new Chart(ctx, {
 								type: 'bar',
 								data: {
 									labels: labelNames,
 									datasets: [{
-										label: 'Quantidades vendidas',
+										label: 'Unidades vendidas',
 										data: labelQnt,
 										borderWidth: 1
 									}]
@@ -64,6 +158,7 @@
 								}
 							});
 						</script>
+
 					</div>
 				</div>
 			</div>
@@ -71,17 +166,20 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<div class="row d-flex">
+						<div class="row d-flex gap-1">
 							<div class="col-md-6">
 								<h6 class="text-center">Categorias de Maior Interesse</h6>
 								<canvas id="grafico2"></canvas>
+							</div>
+
+							<div class="col-md-5">
+								<h5>Informações</h5>
 							</div>
 
 							<!-- Gráfico de Categorias de interresse -->
 							<script>
 								const ctx2 = document.getElementById('grafico2');
 
-	
 								const months = [
 									'Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun',
 									'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
@@ -117,49 +215,11 @@
 								});
 							</script>
 
-
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-12">
-				<div class="card">
-					<div class="card-body">
-						<div class="row d-flex">
-							<div class="col-md-4">
-								<h6 class="text-center">Vendas</h6>
-								<canvas id="grafico3"></canvas>
-							</div>
-
-							<!-- Gráfico de Estoque-->
-							<script>
-								const ctx3 = document.getElementById('grafico3');
-
-								new Chart(ctx3, {
-									type: 'pie',
-									data: {
-										labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-										datasets: [{
-											label: '#',
-											data: [12, 16, 3, 5, 2, 3],
-											borderWidth: 1
-										}]
-									},
-									options: {
-										scales: {
-											y: {
-												beginAtZero: true
-											}
-										}
-									}
-								});
-							</script>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
-
 	</div>
 </main>

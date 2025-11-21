@@ -23,7 +23,7 @@ if(ENVIRONMENT == 'development'){
 	/**
 	 * PROJECT URLs
 	 */ 
-	define("BASE_URL", "http://localhost/structure_pattern/");
+	define("BASE_URL", "http://localhost:8080/structure_pattern/");
 	define("BASE_URL_ADMIN", BASE_URL."Admin");
 	
 	/**

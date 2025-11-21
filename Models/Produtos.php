@@ -58,6 +58,7 @@ class Produtos extends Model
                 return false;
             }
 
+            // nome = :nome
             $set = [];
             foreach ($dados as $campo => $valor) {
                 $set[] = "$campo = :$campo";
@@ -74,9 +75,7 @@ class Produtos extends Model
             $stmt->execute();
 
             return true;
-        } else {
-            return false;
-        }
+        } 
     }
 
     private function existeProdutos($id)
@@ -106,7 +105,7 @@ class Produtos extends Model
 
     public function getByCatId($id_ctg)
     {
-        $sql = $this->db->prepare("SELECT * FROM produtos WHERE id_ctg = :id_ctg");
+        $sql = $this->db->prepare("SELECT p.*,cp.nome_categoria FROM produtos AS p INNER JOIN categorias_produtos AS cp ON id_ctg = id_categoria WHERE p.situacao = '1' AND id_ctg = :id_ctg");
         $sql->bindValue(":id_ctg", $id_ctg);
         $sql->execute();
 
@@ -123,13 +122,11 @@ class Produtos extends Model
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
-            // Retorna como array associativo
             return $sql->fetch(PDO::FETCH_ASSOC);
         } else {
             return ['id' => 0];
         }
     }
-
 
 }
 

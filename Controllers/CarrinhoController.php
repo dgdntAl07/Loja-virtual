@@ -138,14 +138,9 @@ class CarrinhoController extends Controller
         // venda realizada 
         $id_venda = $this->carrinho->registrarVenda($total);
 
-        // echo "<pre>";
-        // var_dump($_SESSION['carrinho']);
-        // exit;
-
         foreach ($_SESSION['carrinho'] as $item) {
             $this->carrinho->registrarItem($id_venda, $item['id'], $item['quantidade'], $item['preco']);
 
-            // atualiza o estoque do produto
             $novoEstoque = $item['quantidade'];
             $this->produtos->atualizarProdutos($item['id'], [
                 'quantidade' => $this->carrinho->buscarPorId($item['id'])['quantidade'] - $novoEstoque

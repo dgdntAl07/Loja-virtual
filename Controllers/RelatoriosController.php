@@ -27,9 +27,11 @@ class RelatoriosController extends Controller
         $this->data['products'] = $this->graficoProdutosVendidos();
         $this->data['countCtg'] = $this->graficoCategorias();
         $this->data['countVendas'] = $this->graficoVendas();
+        $this->data['countEstoque'] = $this->graficoEstoque();
+        $this->data['sumTotalVendas'] = $this->relatorios->sumTotal();
 
         // echo "<pre>";
-        // print_r($this->data['countCtg']);
+        // print_r($this->data['countEstoque']);
         // exit;
 
         $this->loadTemplateAdmin("Admin/Relatorios/index", $this->data);
@@ -46,6 +48,10 @@ class RelatoriosController extends Controller
 
     public function graficoVendas(){
         return $this->relatorios->countVendas();
+    }
+
+    public function graficoEstoque(){
+        return $this->relatorios->countEstoque();
     }
 
 

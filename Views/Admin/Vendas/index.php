@@ -59,17 +59,17 @@
                                 </thead>
                                 <tbody>
                                     <?php if (isset($vendas)): ?>
-                                        <?php foreach ($vendas as $venda): ?>
+                                        <?php foreach ($vendas as $vd): ?>
                                             <tr>
-                                                <td><?= $venda['id']; ?></td>
+                                                <td><?= $vd['id']; ?></td>
                                                 <td>
                                                     <button type="submit" class="btn btn-outline-success" data-bs-toggle="modal"
-                                                        data-bs-target="#produtoVendido<?= $venda['id']; ?>">
+                                                        data-bs-target="#produtoVendido<?= $vd['id']; ?>">
                                                         Ver produtos
                                                     </button>
 
                                                     <!-- Modal dos produtos vendidos -->
-                                                    <div class="modal fade" id="produtoVendido<?= $venda['id']; ?>"
+                                                    <div class="modal fade" id="produtoVendido<?= $vd['id']; ?>"
                                                         aria-hidden="true" tabindex="-1">
                                                         <div class="modal-dialog modal-lg modal-dialog-centered">
                                                             <div class="modal-content">
@@ -81,7 +81,7 @@
                                                                 <div class="modal-body">
                                                                     <div class="row">
                                                                         <div class="col-md-12">
-                                                                            <?php if (!empty($venda['items'])): ?>
+                                                                            <?php if (!empty($vd['items'])): ?>
                                                                                 <table class="table">
                                                                                     <thead>
                                                                                         <tr>
@@ -92,20 +92,20 @@
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <?php foreach ($venda['items'] as $item): ?>
+                                                                                        <?php foreach ($vd['items'] as $item): ?>
                                                                                             <tr>
                                                                                                 <td><?= $item['id']; ?>
                                                                                                 </td>
-                                                                                                <td><?= $item['id_produto']?></td>
+                                                                                                <td><?= $item['nome_produto']?></td>
                                                                                                 <td><?= $item['quantidade']?></td>
                                                                                                 <td><?= "R$ " . number_format($item['preco'], 2,",", ".")?></td>
                                                                                             </tr>
-                                                                                        <?php endforeach ?>
+                                                                                        <?php endforeach; ?>
                                                                                     </tbody>
                                                                                 </table>
                                                                             <?php else: ?>
                                                                                 <div class="alert alert-danger" role="alert">
-                                                                                    A simple danger alert—check it out!
+                                                                                    Ocorreu um erro na listagem de produtos vendidos!!!
                                                                                 </div>
                                                                             <?php endif; ?>
 
@@ -119,15 +119,15 @@
                                                     <!-- Fim do Modal dos produtos vendidos -->
 
                                                 </td>
-                                                <td><?= date("d/m/Y",strtotime($venda['data_venda']) ); ?></td>
+                                                <td><?= date("d/m/Y",strtotime($vd['data_venda']) ); ?></td>
                                                 <td>
                                                     <button type="submit" class="btn btn-outline-primary">
                                                         Ver comprador
                                                     </button>
                                                 </td>
-                                                <td><?= "R$ " . number_format($venda['total'], 2, ",", "."); ?></td>
+                                                <td><?= "R$ " . number_format($vd['total'], 2, ",", "."); ?></td>
                                                 <td>
-                                                    <a data-bs-toggle="" data-bs-target="">
+                                                    <button class="btn btn-link pl-1 link-dark" data-bs-toggle="modal" data-bs-target="#excluirVenda<?= $vd['id']; ?>">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                             <path
@@ -135,13 +135,39 @@
                                                             <path
                                                                 d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                                                         </svg>
-                                                    </a>
+                                                    </button>
+
+                                                    <!-- Modal de Excluir Vendas -->
+                                                    <div class="modal fade" id="excluirVenda<?= $vd['id']; ?>" tabindex="-1" aria-labelledby="exModal" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exModal">Excluir venda</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p>Realmente deseja excluir esta venda?</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form method="POST" action="<?= BASE_URL ?>Vendas/excluirVenda">
+                                                                        <input type="hidden" name="id_produto_venda"
+                                                                            value="<?= $vd['id'] ?>">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Cancelar</button>
+                                                                        <button type="submit" class="btn btn-danger">Enviar</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Fim do Modal de Excluir Vendas -->
+                                                  
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </tbody>
-                            </table>
+                            </table>  
                         <?php else: ?>
                             <p>Nenhum produto vendido</p>
                         <?php endif; ?>

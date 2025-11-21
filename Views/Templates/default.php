@@ -71,11 +71,9 @@
                             <?php foreach ($viewData['categ'] as $cat): ?>
                                 <li>
                                     <a class="dropdown-item"
-                                        href="<?= BASE_URL . '?id_ctg=' . $cat['id_categoria'] ?>"><?= $cat['nome_categoria'] ?></a>
+                                        href="<?= BASE_URL . '?id_ctg=' . $cat['id_categoria'] ?>"><?= $cat['nome_categoria']; ?></a>
                                 </li>
                             <?php endforeach; ?>
-
-
 
                         </ul>
                     </li>

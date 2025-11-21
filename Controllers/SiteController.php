@@ -23,6 +23,10 @@ class SiteController extends Controller
             $this->data['produtos_list'] = $produtos->getAll();
         };
 
+        // echo "<pre>";
+        // print_r($this->data['produtos_list']);
+        // exit;
+
         $this->data['categ'] = $this->categorias->pegarNomeCat();
 
         // var_dump($this->data['categ']);

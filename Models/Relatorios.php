@@ -32,8 +32,8 @@ class Relatorios extends Model
 
     public function countCtg()
     {
-        $sql = $this->db->query("SELECT c.nome_categoria AS nomeCatg, COUNT(*) AS total_itens FROM vendas_itens AS vi JOIN produtos AS p ON p.id = vi.id_produto 
-        JOIN categorias_produtos AS c ON c.id_categoria = p.id GROUP BY c.nome_categoria");
+        $sql = $this->db->query("SELECT c.nome_categoria AS nomeCatg, COUNT(*) AS total_itens, v.data_venda AS datas FROM vendas_itens AS vi JOIN produtos AS p ON p.id = vi.id_produto 
+        JOIN categorias_produtos AS c ON c.id_categoria = p.id JOIN vendas AS v ON v.id = vi.id_venda GROUP BY c.nome_categoria");
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
@@ -50,6 +50,28 @@ class Relatorios extends Model
 
         if ($sql->rowCount() > 0) {
             return $sql->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return [];
+        }
+    }
+
+    public function countEstoque(){
+        $sql = $this->db->query("SELECT p.nome_produto AS produto, p.quantidade AS total_itens FROM produtos AS p GROUP BY p.nome_produto;");
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            return $sql->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return [];
+        }
+    }
+
+    public function sumTotal(){
+        $sql = $this->db->query("SELECT SUM(total) AS total FROM vendas");
+        $sql->execute();
+
+        if ($sql->rowCount() > 0) {
+            return $sql->fetch(PDO::FETCH_ASSOC);
         } else {
             return [];
         }
