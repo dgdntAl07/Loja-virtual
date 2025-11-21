@@ -102,7 +102,11 @@ class ProdutosController extends Controller
 			}
 
 			if (!empty($_POST['categoria_edit'] ?? '')) {
-				$dados['id_ctg'] = $_POST['categoria_edit'];
+				if($dados['id_ctg'] == 0 ){
+					$dados['id_ctg'] = NULL;
+				} else {
+					$dados['id_ctg'] = $_POST['categoria_edit'];
+				}
 			}
 
 			if (!empty($_POST['preco_edit'] ?? '')) {

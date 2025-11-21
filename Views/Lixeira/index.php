@@ -56,7 +56,7 @@
                             </div>
                         <?php endif; ?>
 
-                        <?php if(!empty($produto_lixeira)): ?>
+                        <?php if(!empty($produtos_lixeira)): ?>
                             <table id="datatables-responsive" class="table dataTable no-footer dtr-inline table-hover"
                                 style="width: 100%;" role="grid" aria-describedby="datatables-responsive_info">
                                 <thead>
@@ -64,7 +64,6 @@
                                     <th>Produto</th>
                                     <th>Quantidade</th>
                                     <th>Descrição</th>
-                                    <th>Status</th>
                                     <th>Preço</th>
                                     <th>Categoria</th>
                                     <th>Ações</th>
@@ -72,28 +71,24 @@
 
                                 <tbody>
                                     <?php if (isset($produtos_lixeira)): ?>
-                                        <?php foreach ($produtos_lixeira as $produto_lixeira): ?>
+                                        <?php foreach ($produtos_lixeira as $produtos_lixeira): ?>
                                             <tr>
-                                                <td><?= $produto_lixeira->id; ?></td>
-                                                <td><?= $produto_lixeira->nome_produto; ?></td>
-                                                <td><?= $produto_lixeira->quantidade; ?></td>
-                                                <td><?= $produto_lixeira->descricao; ?></td>
-                                                <td
-                                                    class="<?= $produto_lixeira->quantidade > 0 ? 'table-success' : 'table-danger'; ?>">
-                                                    <?= $produto_lixeira->quantidade > 0 ? "Disponivel" : "Indisponivel"; ?>
-                                                </td>
-                                                <td><?= "R$" . number_format($produto_lixeira->preco, 2, ',', '.'); ?></td>
-                                                <td><?= $produto_lixeira->categoria; ?></td>
+                                                <td><?= $produtos_lixeira->id; ?></td>
+                                                <td><?= $produtos_lixeira->nome_produto; ?></td>
+                                                <td><?= $produtos_lixeira->quantidade; ?></td>
+                                                <td><?= $produtos_lixeira->descricao; ?></td>
+                                                <td><?= "R$" . number_format($produtos_lixeira->preco, 2, ',', '.'); ?></td>
+                                                <td><?= $produtos_lixeira->nome_categoria; ?></td>
                                                 <td class="table-action">
                                                     <a data-bs-toggle="modal"
-                                                        data-bs-target="#excluirproduto<?= $produto_lixeira->id; ?>">
+                                                        data-bs-target="#excluirproduto<?= $produtos_lixeira->id; ?>">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
                                                             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                                                         </svg>
                                                     </a>
                                                     <a data-bs-toggle="modal"
-                                                        data-bs-target="#restaurarproduto<?= $produto_lixeira->id; ?>">
+                                                        data-bs-target="#restaurarproduto<?= $produtos_lixeira->id; ?>">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                             fill="currentColor" class="bi bi-arrow-counterclockwise"
                                                             viewBox="0 0 16 16">
@@ -105,7 +100,7 @@
                                                     </a>
                                                 </td>
                                             </tr>
-                                            <div class="modal fade" id="restaurarproduto<?= $produto_lixeira->id; ?>" tabindex="-1"
+                                            <div class="modal fade" id="restaurarproduto<?= $produtos_lixeira->id; ?>" tabindex="-1"
                                                 role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                                     <div class="modal-content">
@@ -116,12 +111,12 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             Deseja realmente restaurar o produto
-                                                            <strong><?= $produto_lixeira->nome_produto; ?></strong>?
+                                                            <strong><?= $produtos_lixeira->nome_produto; ?></strong>?
                                                         </div>
                                                         <div class="modal-footer">
                                                             <form method="POST" action="<?= BASE_URL ?>Lixeira/restaurarProduto">
                                                                 <input type="hidden" name="id_produto_restaurar"
-                                                                    value="<?= $produto_lixeira->id; ?>">
+                                                                    value="<?= $produtos_lixeira->id; ?>">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Cancelar</button>
                                                                 <button type="submit" class="btn btn-success">Restaurar</button>
@@ -131,7 +126,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="modal fade" id="excluirproduto<?= $produto_lixeira->id; ?>" tabindex="-1"
+                                            <div class="modal fade" id="excluirproduto<?= $produtos_lixeira->id; ?>" tabindex="-1"
                                                 role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                                     <div class="modal-content">
@@ -142,12 +137,12 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             Deseja realmente excluir o produto
-                                                            <strong><?= $produto_lixeira->nome_produto; ?></strong>?
+                                                            <strong><?= $produtos_lixeira->nome_produto; ?></strong>?
                                                         </div>
                                                         <div class="modal-footer">
                                                             <form method="POST" action="<?= BASE_URL ?>Lixeira/delProduto">
                                                                 <input type="hidden" name="id_produto_excluir"
-                                                                    value="<?= $produto_lixeira->id; ?>">
+                                                                    value="<?= $produtos_lixeira->id; ?>">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Cancelar</button>
                                                                 <button type="submit" class="btn btn-danger">Excluir</button>

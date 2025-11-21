@@ -3,9 +3,9 @@
 class Lixeira extends Model
 {
 
-    public function situacaoProduto()
+    public function produtosExcluidos()
     {
-        $sql = $this->db->query("SELECT * FROM produtos WHERE situacao = '0'");
+        $sql = $this->db->query("SELECT p.*, c.nome_categoria FROM produtos AS p INNER JOIN categorias_produtos AS c ON p.id_ctg = c.id_categoria WHERE situacao = '0'");
 
         if ($sql->rowCount() > 0) {
             return $sql->fetchAll();

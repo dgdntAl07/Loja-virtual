@@ -18,6 +18,7 @@ class LixeiraController extends Controller
         }
         
         $this->lixeira = new Lixeira();
+        $this->produtos = new Produtos();
     }
     
     
@@ -27,7 +28,11 @@ class LixeiraController extends Controller
         
 
         $this->data['nivel-1'] = 'Lixeira';
-        $this->data['produtos_lixeira'] = $this->lixeira->situacaoProduto();
+        $this->data['produtos_lixeira'] = $this->lixeira->produtosExcluidos();
+
+        // echo '<pre>';
+        // print_r($this->data['produtos_lixeira']);
+        // exit;
 
         $this->loadTemplateAdmin('Lixeira/index', $this->data);
 

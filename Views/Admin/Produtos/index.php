@@ -85,16 +85,10 @@
                                                             <select id="categoria" class="form-select" name="categoria"
                                                                 required>
                                                                 <option disabled>Selecione o tipo</option>
-                                                                <option value="limpeza">Limpeza</option>
-                                                                <option value="perfumes">Perfumes</option>
-                                                                <option value="cosmeticos">Cosmeticos</option>
-                                                                <option value="brindes">Brindes</option>
-
-                                                                <?php foreach ($permissions_list as $permission): ?>
-                                                                    <option value="<?= $permission['id']; ?>">
-                                                                        <?= $permission['name']; ?>
-                                                                    </option>
-                                                                <?php endforeach; ?>
+                                                                <option value="1">Limpeza</option>
+                                                                <option value="2">Perfumes</option>
+                                                                <option value="3">Cosmeticos</option>
+                                                                <option value="4">Brindes</option>
                                                             </select>
                                                         </div>
                                                     </div>

@@ -17,28 +17,28 @@
 		</div>
 
 		<div class="row">
-			<div class="col-6">
+			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<div class="row d-flex justify-content-evenly">
-							<div class="col-md-12">
+						<div class="row d-flex">
+							<div class="col-md-6">
 								<h6 class="text-center">Produtos Mais Vendidos</h6>
 								<canvas id="grafico1"></canvas>
 							</div>
 						</div>
 
-						<!-- Gráfico de Vendas-->
+						<!-- Gráfico de Produtos mais Vendidos-->
 						<script>
 							const ctx = document.getElementById('grafico1');
 							const produtos = <?= json_encode($products); ?>;
-							
+
 							let labelNames = [];
-							for(let i = 0; i < produtos.length; i++){
+							for (let i = 0; i < produtos.length; i++) {
 								labelNames.push(produtos[i].nome_produto);
 							};
 
 							let labelQnt = [];
-							for(let i = 0; i < produtos.length; i++){
+							for (let i = 0; i < produtos.length; i++) {
 								labelQnt.push(produtos[i].qtd);
 							}
 
@@ -68,26 +68,42 @@
 				</div>
 			</div>
 
-			<div class="col-6">
+			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<div class="row d-flex justify-content-evenly">
+						<div class="row d-flex">
 							<div class="col-md-6">
 								<h6 class="text-center">Categorias de Maior Interesse</h6>
 								<canvas id="grafico2"></canvas>
 							</div>
 
-							<!-- Gráfico de Produtos Mais Vendidos -->
+							<!-- Gráfico de Categorias de interresse -->
 							<script>
 								const ctx2 = document.getElementById('grafico2');
 
+	
+								const months = [
+									'Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun',
+									'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
+								];
+
+								const categorias = <?= json_encode($countCtg); ?>;
+
+								let nomeCtg = [];
+								let qtdCtg = [];
+
+								for (let i = 0; i < categorias.length; i++) {
+									nomeCtg.push(categorias[i].nome_categoria);
+									qtdCtg.push(categorias[i].total_itens);
+								}
+
 								new Chart(ctx2, {
-									type: 'polarArea',
+									type: 'line',
 									data: {
-										labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+										labels: months, // ← nomes das categorias no eixo X
 										datasets: [{
-											label: '#',
-											data: [12, 16, 3, 5, 2, 3],
+											label: "Quantidade",
+											data: qtdCtg,
 											borderWidth: 1
 										}]
 									},
@@ -101,26 +117,27 @@
 								});
 							</script>
 
-						</div> 
+
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-6">
+			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<div class="row d-flex justify-content-evenly">
-							<div class="col-md-6">
+						<div class="row d-flex">
+							<div class="col-md-4">
 								<h6 class="text-center">Vendas</h6>
 								<canvas id="grafico3"></canvas>
 							</div>
 
-							<!-- Gráfico de Produtos Mais Vendidos -->
+							<!-- Gráfico de Estoque-->
 							<script>
 								const ctx3 = document.getElementById('grafico3');
 
 								new Chart(ctx3, {
-									type: 'bar',
+									type: 'pie',
 									data: {
 										labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 										datasets: [{
@@ -138,7 +155,7 @@
 									}
 								});
 							</script>
-						</div> 
+						</div>
 					</div>
 				</div>
 			</div>
