@@ -14,6 +14,7 @@ class CarrinhoController extends Controller
     public function index()
     {
         $dados['carrinho'] = $_SESSION['carrinho'] ?? [];
+
         $this->loadTemplateSite("Home/Carrinho/index", $dados);
     }
 
@@ -152,4 +153,6 @@ class CarrinhoController extends Controller
         header("Location: " . BASE_URL . "Carrinho");
         exit;
     }
+
+    
 }

@@ -20,13 +20,15 @@ class ProdutosController extends Controller
 	{
 
 		$produtos = new Produtos();
+		$categorias = new Categorias();
 
 		$this->data['nivel-1'] = 'Estoque';
 		$this->data['produtos_list'] = $produtos->getAll();
+		$this->data['categoriasExistentes'] = $categorias->getCategorias();
 
 		// echo "<pre>";
-        // print_r($this->data['nomeCateg']);
-        // exit;
+		// print_r($this->data['categoriasExistentes']);
+		// exit;
 
 		$this->loadTemplateAdmin("Admin/Produtos/index", $this->data);
 	}
@@ -34,12 +36,14 @@ class ProdutosController extends Controller
 	public function create()
 	{
 		$produtos = new Produtos();
+		$categorias = new Categorias();
 
 		if (
 			isset($_POST['nome_produto']) && !empty($_POST['nome_produto']) &&
 			isset($_POST['quantidade']) && !empty($_POST['quantidade']) &&
 			isset($_POST['descricao']) && !empty($_POST['descricao']) &&
-			isset($_POST['preco']) && !empty($_POST['preco'])
+			isset($_POST['preco']) && !empty($_POST['preco']) &&
+			isset($_POST['newCategoria']) && !empty($_POST['newCategoria'])
 		) {
 			$nome_produto = addslashes(trim($_POST['nome_produto']));
 			$quantidade = intval($_POST['quantidade']);
@@ -61,6 +65,10 @@ class ProdutosController extends Controller
 				$upload = uploaded_file($file, $folder);
 			}
 
+			$newCategoria = $_POST['newCategoria'];
+
+			$categorias->AddCategoria($newCategoria);
+
 			$produtos->adicionarProdutos(
 				$nome_produto,
 				$descricao,
@@ -69,6 +77,8 @@ class ProdutosController extends Controller
 				$id_ctg,
 				$upload
 			);
+
+
 
 			redirect('Produtos');
 			exit;
@@ -102,7 +112,7 @@ class ProdutosController extends Controller
 			}
 
 			if (!empty($_POST['categoria_edit'] ?? '')) {
-				if($dados['id_ctg'] == 0 ){
+				if ($dados['id_ctg'] == 0) {
 					$dados['id_ctg'] = NULL;
 				} else {
 					$dados['id_ctg'] = $_POST['categoria_edit'];
@@ -119,7 +129,7 @@ class ProdutosController extends Controller
 			$folder = 'Assets/Uploads/Produtos/' . $id . '/';
 			$upload = '';
 
-			
+
 
 			if (empty($dados)) {
 				echo "Nenhum campo foi alterado.";
@@ -134,4 +144,17 @@ class ProdutosController extends Controller
 		}
 	}
 
+
+	public function addCategoria()
+	{
+		if(isset($_POST['newCategoria']) && !empty($_POST['newCategoria'])) {
+			$categorias = new Categorias();
+
+			$newCategoria = $_POST['newCategoria'];
+			$categorias->AddCategoria($newCategoria);
+		}
+
+		redirect('Produtos');
+		exit;
+	}
 }

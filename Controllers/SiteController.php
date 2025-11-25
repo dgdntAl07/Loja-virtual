@@ -38,7 +38,17 @@ class SiteController extends Controller
         // print_r($this->data['categ']);
         // exit;
 
+        $this->data['countItems'] = $this->countItems();
         $this->loadTemplateSite('/Home/Principal/index', $this->data);
 
+    }
+
+    public function countItems() {
+        if (isset($_SESSION['carrinho']) && is_array($_SESSION['carrinho'])) {
+            $total_unidades = array_sum(array_column($_SESSION['carrinho'], 'quantidade'));
+
+            return $total_unidades; 
+        }
+        return 0;
     }
 }

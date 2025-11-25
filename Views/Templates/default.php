@@ -39,7 +39,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg border-bottom shadow-sm mb-3 navbar-dark bg-dark"> <!-- -->
+
+    <nav class="navbar navbar-expand-lg border-bottom shadow-sm mb-3 navbar-dark bg-dark">
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">
@@ -79,7 +80,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Contatos</a>
+                        <a href="#" class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Contatos</a>
                     </li>
 
                 </ul>
@@ -88,9 +89,7 @@
             <div class="align-self-end">
                 <ul class="navbar-nav gap-2">
 
-                    <li class="nav-item d-flex align-items-center">
-                        <a href="<?= BASE_URL . "Cadastro"; ?> " class="nav-link">Cadastro</a>
-                    </li>
+                    
 
                     <li class="nav-item d-flex align-items-center">
                         <a href="<?= BASE_URL . "Login"; ?>" class="nav-link">Login</a>
@@ -101,7 +100,9 @@
                             <a href="<?= BASE_URL . "Carrinho"; ?>" class="nav-link link-white">
                                 <i class="bi-cart-fill me-1"></i>
                                 Cart
-                                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                                <span class="badge bg-dark text-white ms-1 rounded-pill">
+                                    <?= $viewData['countItems'] ?? 0;?>
+                                </span>
                             </a>
                         </button>
                     </li>
@@ -111,10 +112,12 @@
             </div>
         </div>
     </nav>
+
     <main class="align-content-lg-start">
         <!-- load content -->
         <?php $this->loadViewInTemplate($viewName, $viewData); ?>
     </main>
+
     <!-- load JavaScript -->
     <?php if (isset($viewData['JS'])) {
         echo $viewData['JS'];

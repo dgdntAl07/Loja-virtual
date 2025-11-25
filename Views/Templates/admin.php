@@ -21,6 +21,8 @@
     <!-- Chart.JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    
+
     <!-- FAVICON -->
     <link rel="shortcut icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" />
     <link rel="icon" href="<?= BASE_URL; ?>Assets/img/favicon.png" type="image/x-icon" />
@@ -48,10 +50,10 @@
                 <ul class="sidebar-nav">
                     <!--  -->
                     <li
-                        class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Dashboard") ? 'active' : ''; ?>">
-                        <a class="sidebar-link" href="<?= BASE_URL . 'Home'; ?>">
+                        class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Dashboards") ? 'active' : ''; ?>">
+                        <a class="sidebar-link" href="<?= BASE_URL . 'Dashboards'; ?>">
                             <i class="align-middle" data-feather="trending-up"></i> <span
-                                class="align-middle">DashBoard</span>
+                                class="align-middle">DashBoards</span>
                         </a>
                     </li>
 
@@ -66,13 +68,6 @@
                         class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Estoque") ? 'active' : ''; ?>">
                         <a class="sidebar-link" href="<?= BASE_URL . 'Produtos'; ?>">
                             <i class="bi bi-stack"></i> <span class="align-middle">Estoque</span>
-                        </a>
-                    </li>
-
-                    <li
-                        class="sidebar-item <?= (isset($viewData['nivel-1']) && $viewData['nivel-1'] == "Relatorios") ? 'active' : ''; ?>">
-                        <a class="sidebar-link" href="<?= BASE_URL . 'Relatorios'; ?>">
-                            <i class="bi bi-clipboard-data"></i> <span class="align-middle">Relatórios</span>
                         </a>
                     </li>
 
@@ -269,6 +264,10 @@
     <script>
         feather.replace()
     </script>
+
+    <!-- Add categoria -->
+    <script defer src="<?= BASE_URL ;?>Assets/js/addCategoria.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
