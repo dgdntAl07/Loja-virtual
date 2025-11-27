@@ -190,51 +190,12 @@
 						<div class="row d-flex gap-1">
 							<div class="col-md-6">
 								<h6 class="text-center">Categorias de Maior Interesse</h6>
-								<canvas id="grafico2"></canvas>
+								<div id="chart1" style="width: 100%; min-height: 400px;"></div>
 							</div>
 
-							<div class="col-md-5">
-								<h5>Informações</h5>
-							</div>
+							
 
-							<!-- Gráfico de Categorias de interresse -->
-							<script>
-								const ctx2 = document.getElementById('grafico2');
-
-								const months = [
-									'Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun',
-									'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
-								];
-
-								const categorias = <?= json_encode($countCtg); ?>;
-
-								let nomeCtg = [];
-								let qtdCtg = [];
-
-								for (let i = 0; i < categorias.length; i++) {
-									nomeCtg.push(categorias[i].nome_categoria);
-									qtdCtg.push(categorias[i].total_itens);
-								}
-
-								new Chart(ctx2, {
-									type: 'line',
-									data: {
-										labels: months, // ← nomes das categorias no eixo X
-										datasets: [{
-											label: "Quantidade",
-											data: qtdCtg,
-											borderWidth: 1
-										}]
-									},
-									options: {
-										scales: {
-											y: {
-												beginAtZero: true
-											}
-										}
-									}
-								});
-							</script>
+							
 
 						</div>
 					</div>

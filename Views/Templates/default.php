@@ -19,7 +19,8 @@
     <!-- Load CSS -->
     <?php if (isset($viewData['CSS'])) {
         echo $viewData['CSS'];
-    }; ?>
+    }
+    ; ?>
 
     <!-- Estilização -->
     <style>
@@ -49,13 +50,13 @@
             </div>
 
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbar-collapse">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse">
                 <span class="navbar-toggle-icon">
                     <i class="bi bi-list-nested"></i>
                 </span>
             </button>
 
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" id="navbar-collapse">
                 <ul class="navbar-nav flex-grow-1 gap-3">
 
                     <li class="nav-item">
@@ -79,37 +80,44 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Contatos</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-expanded="false">Dropdown</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
                     </li>
-
-                </ul>
-            </div>
-
-            <div class="align-self-end">
-                <ul class="navbar-nav gap-2">
-
-                    
-
-                    <li class="nav-item d-flex align-items-center">
-                        <a href="<?= BASE_URL . "Login"; ?>" class="nav-link">Login</a>
-                    </li>
-
-                    <li>
-                        <button class="btn btn-outline-dark p-0" type="submit">
-                            <a href="<?= BASE_URL . "Carrinho"; ?>" class="nav-link link-white">
-                                <i class="bi-cart-fill me-1"></i>
-                                Cart
-                                <span class="badge bg-dark text-white ms-1 rounded-pill">
-                                    <?= $viewData['countItems'] ?? 0;?>
-                                </span>
-                            </a>
-                        </button>
-                    </li>
-
                 </ul>
 
+                <div class="align-self-end">
+                    <ul class="navbar-nav gap-2">
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="<?= BASE_URL . "Login"; ?>" class="nav-link">Login</a>
+                        </li>
+
+                        <li>
+                            <button class="btn btn-outline-dark p-0" type="submit">
+                                <a href="<?= BASE_URL . "Carrinho"; ?>" class="nav-link link-white">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Cart
+                                    <span class="badge bg-dark text-white ms-1 rounded-pill">
+                                        <?= $viewData['countItems'] ?? 0; ?>
+                                    </span>
+                                </a>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
+
+
         </div>
     </nav>
 
@@ -121,7 +129,8 @@
     <!-- load JavaScript -->
     <?php if (isset($viewData['JS'])) {
         echo $viewData['JS'];
-    }; ?>
+    }
+    ; ?>
 
     <footer class="border-top text-muted bg-light">
         <div class="container">

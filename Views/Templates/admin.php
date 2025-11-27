@@ -266,7 +266,13 @@
     </script>
 
     <!-- Add categoria -->
-    <script defer src="<?= BASE_URL ;?>Assets/js/addCategoria.js"></script>
+    <script src="<?= BASE_URL ;?>Assets/js/addCategoria.js"></script>
+
+    <!-- Gráfico de Categorias -->
+    <script src="<?= BASE_URL ;?>Assets/js/grafCategorias.js"></script>
+
+    <!-- Apache Echarts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/6.0.0/echarts.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
